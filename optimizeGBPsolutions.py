@@ -10,6 +10,7 @@ import math
 from spea_optimizer import SpeaOptimizer
 from photonicCrystalDesign import PhCWDesign
 from paretoFunctions import ParetoMaxFunction
+from gd_optimizer import GradientDescentOptimizer
 from photonicCrystalDesign import PhCWDesign
 
 
@@ -105,6 +106,7 @@ solutions = [{'p2': 0.005009, 'p3': 0.006596, 'p1': -0.135418, 'r0': 0.237322, '
  {'p2': 0.211272, 'p3': -0.042682, 'p1': -0.153843, 'r0': 0.236084, 'r1': 0.2, 'r2': 0.310876, 'r3': 0.2, 's3': -0.078033, 's2': -0.095436, 's1': 0.058},
  {'p2': -0.210475, 'p3': -0.042662, 'p1': -0.162253, 'r0': 0.2, 'r1': 0.2, 'r2': 0.264382, 'r3': 0.231593, 's3': -0.070369, 's2': -0.153377, 's1': -0.12171}]
 
+
 population = []
 for vector in solutions:
     pcw = PhCWDesign(vector, 0, constraintFunctions)
@@ -137,3 +139,45 @@ optimizer = SpeaOptimizer(pareto_function)
 
 optimizer.optimize(population,max_generation,tournament_selection_rate, pareto_archive_size)
 
+
+max_iterations = 5 # number of iterations of the DE alg
+descent_scaler = 0.2
+completion_scaler = 0.1
+alpha_scaler = 0.9
+
+
+# specify the weights for the WeightedSumObjectiveFunction
+
+w1 = 0 # bandwidth weight
+w2 = 0 # group index weight
+w3 = 0 # average loss weight
+w4 = 1 #0.6 # GBP weight
+w5 = 0.0 # loss at ngo (group index) weight
+w6 = 0 # delay weight
+
+# these wights are use in the Objective Function to score mpb results
+weights = [ w1, w2, w3, w4, w5, w6]
+
+
+
+#Initialize objective function
+
+objFunc = WeightedSumObjectiveFunction(weights, experiment)
+
+# Gradient Descent section
+
+print "Starting Gradient Descent Optimizer"
+
+
+
+optimizer2 = GradientDescentOptimizer(objFunc)
+
+results = optimizer2.optimize(population, descent_scaler, completion_scaler, alpha_scaler, max_iterations)
+
+
+
+for pcw in results:
+    print pcw.solution_vector
+    print pcw.figures_of_merit
+
+print "\nGradient Descent solutions generated"

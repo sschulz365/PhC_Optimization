@@ -290,6 +290,7 @@ def parseObjFunctionParams(experiment): # input is an experiment
                 ng0_index = i
 
 
+
         """
         # centralize group index in flat band then minimize group index based on loss
         ng0_index = (bandwidthMaxIndex + bandwidthMinIndex)/2
@@ -419,14 +420,14 @@ def parseObjFunctionParams(experiment): # input is an experiment
         #
         maximum_acceptable_loss = 10
         length_loss_limited = float(maximum_acceptable_loss) / loss_at_ng0 # in dB/ dB/ cm
-        delay_loss_limited = math.fabs(ng0) * length_loss_limited / c * 1000 # in ps
+        delay_loss_limited = (math.fabs(ng0)-5) * length_loss_limited / c * 1000 # in ps
 
         #print "[Debug] Loss Delay: " + str(delay_loss_limited)
 
         # delay formula is derived in respect to "Dispersion engineered slow light in photonic crystals: a comparison" by Sebastian Schulz et al
         initial_pulse_width = 0.045 # t_0 (in ns)
         length_gvd_limited = initial_pulse_width**2 / (4 * math.log(2) * group_velocity_dispersion) # in units of ns^2/ ns^2/cm
-        delay_gvd_limited = math.fabs(ng0) * math.fabs(length_gvd_limited) / c * 1000 # in ps
+        delay_gvd_limited = (math.fabs(ng0)-5) * math.fabs(length_gvd_limited) / c * 1000 # in ps
 
         #print "[Debug] GVD Delay: " + str(delay_gvd_limited) + "\n"
 
@@ -852,14 +853,14 @@ def parseObjFunctionParams3D(experiment): # input is an experiment
         #
         maximum_acceptable_loss = 10
         length_loss_limited = float(maximum_acceptable_loss) / loss_at_ng0 # in dB/ dB/ cm
-        delay_loss_limited = math.fabs(ng0) * length_loss_limited / c * 1000 # in ps
+        delay_loss_limited = (math.fabs(ng0)-5) * length_loss_limited / c * 1000 # in ps
 
         #print "[Debug] Loss Delay: " + str(delay_loss_limited)
 
         # delay formula is derived in respect to "Dispersion engineered slow light in photonic crystals: a comparison" by Sebastian Schulz et al
         initial_pulse_width = 0.045 # t_0 (in ns)
         length_gvd_limited = initial_pulse_width**2 / (4 * math.log(2) * group_velocity_dispersion) # in units of ns^2/ ns^2/cm
-        delay_gvd_limited = math.fabs(ng0) * math.fabs(length_gvd_limited) / c * 1000 # in ps
+        delay_gvd_limited = (math.fabs(ng0)-5) * math.fabs(length_gvd_limited) / c * 1000 # in ps
 
         #print "[Debug] GVD Delay: " + str(delay_gvd_limited) + "\n"
 

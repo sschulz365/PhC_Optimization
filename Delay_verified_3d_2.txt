@@ -1,0 +1,460 @@
+********************* h e l l o ************************** 
+PHOTONIC CRYSTAL SLAB DISPERSION ENGINEERED WAVEGUIDE CALCULATION 
+VERSION 1 - Daryl Beggs 26 August 2010 
+Script by Daryl Beggs - please see him for help and modifications 
+
+Default behavoiur gives a silicon W1 waveguide with air holes 
+Parameters that you can alter are listed below 
+
+calculation-type is a code for what you want to calculate (default 1) 
+calculation-type=0 gives basic calculation of bandstr 
+calculation-type=1 gives bandstr plus group velocities 
+calculation-type=2 gives bandstr plus output fields profiles 
+calculation-type=3 gives bandstr plus group velocities plus output fields profiles 
+
+calculation-type=4 gives bandstr plus group velocities plus calculate integrals 
+calculation-type=5 gives bandstr plus group velocities plus calculate integrals plus output fields profiles 
+
+index-slab is the index of the slab material (default 3.48) 
+index-holes is the index of the holes and cladding (default 1) 
+a1nm is the lattice constant in nm (default 400nm) 
+a2nm is the lattice constant in nm along the waveguide (default a1nm) 
+hslabnm is the height of the slab in nm (default 220nm) 
+r0 is the backgraound radius of holes in units of a1 (default 0.3) 
+
+dispersion engineering by altering first, second and third row of holes 
+r1 is radius of first row of holes (default r0) 
+r2 is radius of second row of holes (default r0) 
+r3 is radius of third row of holes (default r0) 
+s1 is shift of first row of holes inwards (default 0) 
+s2 is shift of second row of holes inwards (default 0) 
+s3 is shift of third row of holes inwards (default 0) 
+p1 is shift of first row of holes along the waveguide (default 0) 
+p2 is shift of second row of holes along the waveguide (default 0) 
+p3 is shift of third row of holes along the waveguide (default 0) 
+w is width of waveguide (i.e. Ww) in units of a*sqrt(3) (i.e. W2 is NOT 2 rows missing) (default 1) 
+
+res is the resolution of the grid in-plane (default 16) 
+resslab is the resolution of the grid out-of-plane (defualt 30) 
+W1band is the band index number of interest (default 23) 
+numbands is the number of band to calcultae and must be greater than W1band (default 30) 
+Ks is the K-vector to start the bandstructure calculations from (default 0.3) 
+Ke is the K-vector to end the bandstructure calculations with (default 0.5) 
+Kinterp is the number of K-vector values between Ks and 0.5 (default 19) 
+
+**************** CALCULATION 1 of 6 BEGINS HERE ***************** 
+CALCULATION TYPE 4: bandstr plus group velocities plus calculate integrals 
+lattice constant: a1 = 400.0nm = 1.0*a1 
+lattice constant along the waveguide: a2 = 400.0nm = 1.0*a1 
+height of the slab: hslab = 220.0nm = 0.55*a1 
+width of the waveguide: w = 692.8203230275509nm = 1*a1*sqrt(3) 
+radius of 1st row of holes: r1 = 80.0nm = 0.2*a1 
+radius of 2nd row of holes: r2 = 80.0nm = 0.2*a1 
+radius of 3rd row of holes: r3 = 104.4648nm = 0.261162*a1 
+shift inwards of 1st row of holes: s1 = -18.3844nm = -0.045961*a1 
+shift inwards of 2nd row of holes: s2 = 1.4852nm = 0.003713*a1 
+shift inwards of 3rd row of holes: s3 = -2.6675999999999997nm = -0.006669*a1 
+shift alongwards of 1st row of holes: p1 = 0.0nm = 0.0*a2 
+shift alongwards of 2nd row of holes: p2 = 0.0nm = 0.0*a2 
+shift alongwards of 3rd row of holes: p3 = 0.0nm = 0.0*a2 
+radius of holes r0 = 0.224803 a 
+Slab index set to 3.48
+Hole index set to 1.0
+Slab material set to ((dielectric material-type) (epsilon . 12.1104))
+Hole material set to ((dielectric material-type) (epsilon . 1.0))
+Default material set to ((dielectric material-type) (epsilon . 1.0))
+Supercell: -0.5 0.5 -9.526279441628825 9.526279441628825 -1.1 1.1
+resolution = #(16.0 16.00834847298508 30.0)
+mesh size = 8
+number of bands = 30
+hieght of holes = 0.55055
+x-grid-points: 16: -0.5 -0.4375 -0.375 -0.3125 -0.25 -0.1875 -0.125 -0.0625 0.0 0.0625 0.125 0.1875 0.25 0.3125 0.375 0.4375 
+y-grid-points: 306: -9.526279441628825 -9.464016177304453 -9.401752912980083 -9.33948964865571 -9.277226384331339 -9.214963120006967 -9.152699855682597 -9.090436591358225 -9.028173327033853 -8.965910062709483 -8.903646798385111 -8.84138353406074 -8.779120269736367 -8.716857005411997 -8.654593741087625 -8.592330476763253 -8.530067212438883 -8.467803948114511 -8.40554068379014 -8.343277419465768 -8.281014155141397 -8.218750890817025 -8.156487626492654 -8.094224362168283 -8.031961097843912 -7.96969783351954 -7.907434569195168 -7.845171304870797 -7.782908040546426 -7.720644776222054 -7.658381511897683 -7.596118247573312 -7.53385498324894 -7.471591718924568 -7.409328454600197 -7.347065190275826 -7.284801925951454 -7.222538661627083 -7.160275397302712 -7.09801213297834 -7.035748868653968 -6.973485604329597 -6.911222340005226 -6.848959075680854 -6.786695811356483 -6.724432547032112 -6.66216928270774 -6.599906018383368 -6.537642754058997 -6.475379489734626 -6.4131162254102545 -6.350852961085883 -6.288589696761512 -6.226326432437141 -6.164063168112769 -6.101799903788398 -6.039536639464027 -5.977273375139655 -5.915010110815283 -5.852746846490912 -5.790483582166541 -5.728220317842169 -5.665957053517798 -5.603693789193427 -5.541430524869055 -5.479167260544684 -5.416903996220312 -5.354640731895941 -5.292377467571569 -5.230114203247198 -5.167850938922826 -5.105587674598455 -5.043324410274083 -4.981061145949712 -4.918797881625341 -4.856534617300969 -4.794271352976598 -4.732008088652226 -4.669744824327855 -4.6074815600034835 -4.5452182956791125 -4.4829550313547415 -4.42069176703037 -4.358428502705999 -4.296165238381627 -4.233901974057256 -4.171638709732884 -4.109375445408513 -4.047112181084142 -3.98484891675977 -3.922585652435399 -3.860322388111027 -3.798059123786656 -3.735795859462284 -3.673532595137913 -3.611269330813541 -3.54900606648917 -3.486742802164799 -3.424479537840427 -3.362216273516056 -3.299953009191684 -3.237689744867313 -3.1754264805429413 -3.1131632162185703 -3.0508999518941984 -2.9886366875698274 -2.9263734232454564 -2.8641101589210844 -2.8018468945967134 -2.7395836302723415 -2.6773203659479705 -2.6150571016235986 -2.5527938372992276 -2.4905305729748566 -2.4282673086504847 -2.3660040443261137 -2.3037407800017418 -2.2414775156773707 -2.179214251352999 -2.116950987028628 -2.054687722704257 -1.992424458379885 -1.930161194055514 -1.867897929731142 -1.805634665406771 -1.743371401082399 -1.681108136758028 -1.6188448724336562 -1.5565816081092851 -1.4943183437849132 -1.4320550794605431 -1.3697918151361712 -1.3075285508117993 -1.2452652864874274 -1.1830020221630573 -1.1207387578386854 -1.0584754935143135 -0.9962122291899433 -0.9339489648655714 -0.8716857005411995 -0.8094224362168276 -0.7471591718924575 -0.6848959075680856 -0.6226326432437137 -0.5603693789193418 -0.49810611459497167 -0.43584285027059977 -0.37357958594622787 -0.31131632162185774 -0.24905305729748584 -0.18678979297311393 -0.12452652864874203 -0.0622632643243719 0.0 0.0622632643243719 0.12452652864874203 0.18678979297311393 0.24905305729748584 0.31131632162185774 0.37357958594622787 0.43584285027059977 0.49810611459497167 0.5603693789193418 0.6226326432437137 0.6848959075680856 0.7471591718924575 0.8094224362168276 0.8716857005411995 0.9339489648655714 0.9962122291899416 1.0584754935143135 1.1207387578386854 1.1830020221630573 1.2452652864874274 1.3075285508117993 1.3697918151361712 1.4320550794605413 1.4943183437849132 1.5565816081092851 1.618844872433657 1.6811081367580272 1.743371401082399 1.805634665406771 1.8678979297311429 1.930161194055513 1.992424458379885 2.054687722704257 2.116950987028627 2.179214251352999 2.2414775156773707 2.3037407800017426 2.3660040443261128 2.4282673086504847 2.4905305729748566 2.5527938372992267 2.6150571016235986 2.6773203659479705 2.7395836302723424 2.8018468945967125 2.8641101589210844 2.9263734232454564 2.9886366875698265 3.0508999518941984 3.1131632162185703 3.175426480542942 3.2376897448673123 3.299953009191684 3.362216273516056 3.424479537840428 3.486742802164798 3.54900606648917 3.611269330813542 3.673532595137912 3.735795859462284 3.798059123786656 3.860322388111028 3.922585652435398 3.98484891675977 4.047112181084142 4.109375445408512 4.171638709732884 4.233901974057256 4.296165238381628 4.358428502705998 4.42069176703037 4.4829550313547415 4.545218295679112 4.6074815600034835 4.669744824327855 4.732008088652227 4.7942713529765975 4.856534617300969 4.918797881625341 4.981061145949711 5.043324410274083 5.105587674598455 5.167850938922827 5.230114203247197 5.292377467571569 5.354640731895941 5.416903996220311 5.479167260544683 5.541430524869055 5.603693789193427 5.665957053517797 5.728220317842169 5.790483582166541 5.852746846490913 5.915010110815283 5.977273375139655 6.039536639464027 6.101799903788397 6.164063168112769 6.226326432437141 6.2885896967615125 6.350852961085883 6.4131162254102545 6.475379489734626 6.537642754058998 6.59990601838337 6.662169282707739 6.7244325470321105 6.786695811356482 6.848959075680854 6.911222340005226 6.973485604329598 7.03574886865397 7.098012132978338 7.16027539730271 7.222538661627082 7.284801925951454 7.347065190275826 7.409328454600198 7.47159171892457 7.533854983248938 7.59611824757331 7.658381511897682 7.720644776222054 7.782908040546426 7.845171304870798 7.9074345691951695 7.969697833519538 8.03196109784391 8.094224362168282 8.156487626492654 8.218750890817025 8.281014155141397 8.34327741946577 8.405540683790141 8.46780394811451 8.530067212438881 8.592330476763253 8.654593741087625 8.716857005411997 8.779120269736369 8.841383534060741 8.90364679838511 8.965910062709481 9.028173327033853 9.090436591358225 9.152699855682597 9.214963120006969 9.27722638433134 9.339489648655709 9.401752912980081 9.464016177304453 
+z-grid-points: 66: -1.1 -1.0666666666666667 -1.0333333333333334 -1.0 -0.9666666666666668 -0.9333333333333335 -0.9000000000000001 -0.8666666666666667 -0.8333333333333335 -0.8 -0.7666666666666668 -0.7333333333333334 -0.7000000000000001 -0.6666666666666667 -0.6333333333333334 -0.6000000000000001 -0.5666666666666668 -0.5333333333333334 -0.5000000000000001 -0.4666666666666668 -0.43333333333333346 -0.40000000000000013 -0.3666666666666668 -0.3333333333333335 -0.30000000000000004 -0.2666666666666667 -0.2333333333333334 -0.20000000000000007 -0.16666666666666674 -0.13333333333333341 -0.10000000000000009 -0.06666666666666687 -0.03333333333333344 0.0 0.033333333333333215 0.06666666666666665 0.09999999999999987 0.1333333333333333 0.16666666666666652 0.19999999999999996 0.23333333333333317 0.2666666666666666 0.2999999999999998 0.33333333333333326 0.3666666666666665 0.3999999999999999 0.4333333333333331 0.46666666666666656 0.5 0.5333333333333332 0.5666666666666667 0.5999999999999999 0.6333333333333333 0.6666666666666665 0.7 0.7333333333333332 0.7666666666666666 0.7999999999999998 0.8333333333333333 0.8666666666666665 0.8999999999999999 0.9333333333333331 0.9666666666666663 1.0 1.0333333333333332 1.0666666666666664 
+z-grid-points-in-slab: 17: -0.2666666666666667 -0.2333333333333334 -0.20000000000000007 -0.16666666666666674 -0.13333333333333341 -0.10000000000000009 -0.06666666666666687 -0.03333333333333344 0.0 0.033333333333333215 0.06666666666666665 0.09999999999999987 0.1333333333333333 0.16666666666666652 0.19999999999999996 0.23333333333333317 0.2666666666666666 
+command-line param: interactive?=false
+command-line param: k-split-index=0
+command-line param: k-split-num=6
+command-line param: Ks=0.3
+command-line param: Ke=0.5
+command-line param: Kinterp=19
+command-line param: calculation-type=4
+command-line param: r0=0.224803
+command-line param: r1=0.2
+command-line param: r2=0.2
+command-line param: r3=0.261162
+command-line param: s3=-0.006669
+command-line param: s2=0.003713
+command-line param: s1=-0.045961
+init-params: initializing eigensolver data
+Computing 30 bands with 1.000000e-07 tolerance.
+Working in 3 dimensions.
+Grid size is 16 x 306 x 66.
+Solving for 10 bands at a time.
+Creating Maxwell data...
+Allocating fields...
+Mesh size is 8.
+Lattice vectors:
+     (1, 0, 0)
+     (0, 19.0526, 0)
+     (0, 0, 2.2)
+Cell volume = 41.9156
+Reciprocal lattice vectors (/ 2 pi):
+     (1, -0, 0)
+     (-0, 0.0524864, -0)
+     (0, -0, 0.454545)
+Geometric objects:
+     block, center = (0,0,0)
+          size (1,19.0526,0.55)
+          axes (1,0,0), (0,1,0), (0,0,1)
+          dielectric constant epsilon = 12.1104
+     cylinder, center = (0.5,-0.911986,0)
+          radius 0.2, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0.5,0.911986,0)
+          radius 0.2, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0,-1.72834,0)
+          radius 0.2, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0,1.72834,0)
+          radius 0.2, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0.5,-2.60475,0)
+          radius 0.261162, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0.5,2.60475,0)
+          radius 0.261162, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0.5,-9.52628,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0,-8.66025,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0.5,-7.79423,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0,-6.9282,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0.5,-6.06218,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0,-5.19615,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0.5,-4.33013,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0,-3.4641,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0,3.4641,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0.5,4.33013,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0,5.19615,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0.5,6.06218,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0,6.9282,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0.5,7.79423,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0,8.66025,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+     cylinder, center = (0.5,9.52628,0)
+          radius 0.224803, height 0.55055, axis (0, 0, 1)
+          dielectric constant epsilon = 1
+Geometric object tree has depth 6 and 86 object nodes (vs. 23 actual objects)
+Initializing dielectric function...
+21 k-points:
+     (0.3,0,0)
+     (0.31,0,0)
+     (0.32,0,0)
+     (0.33,0,0)
+     (0.34,0,0)
+     (0.35,0,0)
+     (0.36,0,0)
+     (0.37,0,0)
+     (0.38,0,0)
+     (0.39,0,0)
+     (0.4,0,0)
+     (0.41,0,0)
+     (0.42,0,0)
+     (0.43,0,0)
+     (0.44,0,0)
+     (0.45,0,0)
+     (0.46,0,0)
+     (0.47,0,0)
+     (0.48,0,0)
+     (0.49,0,0)
+     (0.5,0,0)
+Solving for band polarization: zeven.
+Initializing fields to random numbers...
+elapsed time for initialization: 2 seconds.
+epsilon: 1-12.1104, mean 3.29661, harm. mean 1.25348, 22.7523% > 1, 20.6708% "fill"
+Outputting W1_3D_v1.ctl.txt-epsilon...
+solve_kpoint (0.3,0,0):
+zevenfreqs:, k index, k1, k2, k3, kmag/2pi, zeven band 1, zeven band 2, zeven band 3, zeven band 4, zeven band 5, zeven band 6, zeven band 7, zeven band 8, zeven band 9, zeven band 10, zeven band 11, zeven band 12, zeven band 13, zeven band 14, zeven band 15, zeven band 16, zeven band 17, zeven band 18, zeven band 19, zeven band 20, zeven band 21, zeven band 22, zeven band 23, zeven band 24, zeven band 25, zeven band 26, zeven band 27, zeven band 28, zeven band 29, zeven band 30
+Solving for bands 1 to 10...
+    iteration    1: trace = 5.812449557808244 (197.608% change)
+    iteration    2: trace = 0.4546768335278786 (170.98% change)
+    iteration    3: trace = 0.3179346096506377 (35.3974% change)
+    iteration    4: trace = 0.2878685608606421 (9.92601% change)
+    iteration    5: trace = 0.2765388707635651 (4.01472% change)
+    iteration    6: trace = 0.2710209206169298 (2.01547% change)
+    iteration    7: trace = 0.2675507870563326 (1.28864% change)
+    iteration    8: trace = 0.2660746018949412 (0.553266% change)
+    iteration    9: trace = 0.2649059344697591 (0.440192% change)
+    iteration   10: trace = 0.2643910725818321 (0.194546% change)
+    iteration   11: trace = 0.2639570370183842 (0.164299% change)
+    iteration   12: trace = 0.2637722153597626 (0.0700441% change)
+    iteration   13: trace = 0.2636598207272388 (0.0426196% change)
+    iteration   14: trace = 0.2635961260968148 (0.0241608% change)
+    iteration   15: trace = 0.2635596658790733 (0.0138328% change)
+    iteration   16: trace = 0.2635366840397874 (0.00872017% change)
+    iteration   17: trace = 0.2635271670163965 (0.00361134% change)
+    iteration   18: trace = 0.2635229533888178 (0.00159895% change)
+    iteration   19: trace = 0.2635213643994656 (0.000602981% change)
+    iteration   20: trace = 0.2635207963912105 (0.000215546% change)
+    iteration   21: trace = 0.2635205050324293 (0.000110564% change)
+    iteration   22: trace = 0.2635203569049545 (5.6211e-05% change)
+    iteration   23: trace = 0.2635202740033041 (3.14593e-05% change)
+    iteration   24: trace = 0.2635202293063748 (1.69615e-05% change)
+    iteration   25: trace = 0.2635202010543039 (1.0721e-05% change)
+    iteration   26: trace = 0.2635201825440431 (7.02423e-06% change)
+Finished solving for bands 1 to 10 after 26 iterations.
+Solving for bands 11 to 20...
+    iteration    1: trace = 8.14977699820056 (196.655% change)
+    iteration    2: trace = 0.9081531913743008 (159.896% change)
+    iteration    3: trace = 0.6039916340552509 (40.2292% change)
+    iteration    4: trace = 0.5182137999748867 (15.2874% change)
+    iteration    5: trace = 0.4879483292557541 (6.01602% change)
+    iteration    6: trace = 0.4756983550498098 (2.54242% change)
+    iteration    7: trace = 0.4694448366059567 (1.3233% change)
+    iteration    8: trace = 0.4669109501157168 (0.541223% change)
+    iteration    9: trace = 0.4650866152227669 (0.391489% change)
+    iteration   10: trace = 0.4638630749131101 (0.263424% change)
+    iteration   11: trace = 0.4628503340855867 (0.218566% change)
+    iteration   12: trace = 0.4621498205812138 (0.151462% change)
+    iteration   13: trace = 0.4617064448588775 (0.0959837% change)
+    iteration   14: trace = 0.4613862878757751 (0.0693662% change)
+    iteration   15: trace = 0.4611858079766645 (0.0434611% change)
+    iteration   16: trace = 0.4610069834196844 (0.0387825% change)
+    iteration   17: trace = 0.4608779472181574 (0.027994% change)
+    iteration   18: trace = 0.4607763981068317 (0.0220363% change)
+    iteration   19: trace = 0.4607040765245715 (0.0156968% change)
+    iteration   20: trace = 0.4606522751077058 (0.0112446% change)
+    iteration   21: trace = 0.4606048865837136 (0.0102878% change)
+    iteration   22: trace = 0.4605618688240707 (0.00933984% change)
+    iteration   23: trace = 0.4605182693206089 (0.00946704% change)
+    iteration   24: trace = 0.4604880074732008 (0.00657147% change)
+    iteration   25: trace = 0.4604688525012149 (0.0041598% change)
+    iteration   26: trace = 0.4604583335806359 (0.00228442% change)
+    iteration   27: trace = 0.4604527786240657 (0.0012064% change)
+    iteration   28: trace = 0.460449165563938 (0.000784679% change)
+    iteration   29: trace = 0.4604468607322605 (0.000500563% change)
+    iteration   30: trace = 0.4604450170088987 (0.000400421% change)
+    iteration   31: trace = 0.4604434781089434 (0.000334221% change)
+    iteration   32: trace = 0.4604419867520872 (0.000323896% change)
+    iteration   33: trace = 0.4604405217648654 (0.00031817% change)
+    iteration   34: trace = 0.4604392137105827 (0.000284088% change)
+    iteration   35: trace = 0.4604378404666826 (0.000298247% change)
+    iteration   36: trace = 0.460436237347523 (0.000348173% change)
+    iteration   37: trace = 0.4604337710295766 (0.00053565% change)
+    iteration   38: trace = 0.4604296947990703 (0.000885306% change)
+    iteration   39: trace = 0.4604236400686676 (0.00131503% change)
+    iteration   40: trace = 0.4604162233222108 (0.00161087% change)
+    iteration   41: trace = 0.4604098241986454 (0.00138987% change)
+    iteration   42: trace = 0.4604051517339691 (0.00101485% change)
+    iteration   43: trace = 0.4604020998236015 (0.000662877% change)
+    iteration   44: trace = 0.4604004509331243 (0.000358142% change)
+    iteration   45: trace = 0.4603996595890026 (0.000171882% change)
+    iteration   46: trace = 0.4603992989806407 (7.83251e-05% change)
+    iteration   47: trace = 0.4603991302408781 (3.66507e-05% change)
+    iteration   48: trace = 0.4603990433031658 (1.88831e-05% change)
+    iteration   49: trace = 0.460398993071456 (1.09105e-05% change)
+    iteration   50: trace = 0.4603989596315281 (7.26325e-06% change)
+Finished solving for bands 11 to 20 after 50 iterations.
+Solving for bands 21 to 30...
+    iteration    1: trace = 10.14491339015291 (195.846% change)
+    iteration    2: trace = 1.516098934303565 (147.994% change)
+    iteration    3: trace = 1.077676752151077 (33.8057% change)
+    iteration    4: trace = 0.9059493580140459 (17.3145% change)
+    iteration    5: trace = 0.846680997217209 (6.76336% change)
+    iteration    6: trace = 0.8258494183144041 (2.49103% change)
+    iteration    7: trace = 0.8160064260918821 (1.19901% change)
+    iteration    8: trace = 0.809806405758386 (0.762698% change)
+    iteration    9: trace = 0.805427806692639 (0.542163% change)
+    iteration   10: trace = 0.8023855097451859 (0.378439% change)
+    iteration   11: trace = 0.8002280084782372 (0.269248% change)
+    iteration   12: trace = 0.7982285336815271 (0.250176% change)
+    iteration   13: trace = 0.7965923953770299 (0.205181% change)
+    iteration   14: trace = 0.795178044759649 (0.177708% change)
+    iteration   15: trace = 0.7940682672040101 (0.139661% change)
+    iteration   16: trace = 0.7931985018748348 (0.109593% change)
+    iteration   17: trace = 0.7924105564874316 (0.0993871% change)
+    iteration   18: trace = 0.7918229004133286 (0.0741881% change)
+    iteration   19: trace = 0.7913691543828882 (0.0573204% change)
+    iteration   20: trace = 0.7910256676723129 (0.0434135% change)
+    iteration   21: trace = 0.7907420014665275 (0.035867% change)
+    iteration   22: trace = 0.7904977850218308 (0.0308892% change)
+    iteration   23: trace = 0.7903148425689495 (0.0231454% change)
+    iteration   24: trace = 0.7901495049404169 (0.0209227% change)
+    iteration   25: trace = 0.7900103082192856 (0.0176181% change)
+    iteration   26: trace = 0.7899010613572894 (0.0138295% change)
+    iteration   27: trace = 0.7898068832120876 (0.0119235% change)
+    iteration   28: trace = 0.7897263013396983 (0.0102033% change)
+    iteration   29: trace = 0.7896484282364851 (0.00986126% change)
+    iteration   30: trace = 0.7895762396911927 (0.00914228% change)
+    iteration   31: trace = 0.7895025951406184 (0.00932753% change)
+    iteration   32: trace = 0.7894191389094489 (0.0105713% change)
+    iteration   33: trace = 0.7893356202336119 (0.0105803% change)
+    iteration   34: trace = 0.7892437479410596 (0.0116399% change)
+    iteration   35: trace = 0.7891437906223744 (0.0126658% change)
+    iteration   36: trace = 0.7890395622676423 (0.0132086% change)
+    iteration   37: trace = 0.7889354712005636 (0.013193% change)
+    iteration   38: trace = 0.7888462249594513 (0.0113129% change)
+    iteration   39: trace = 0.7887673201530745 (0.0100031% change)
+    iteration   40: trace = 0.7887036546534223 (0.00807184% change)
+    iteration   41: trace = 0.7886537230432822 (0.00633105% change)
+    iteration   42: trace = 0.7886117639927557 (0.00532048% change)
+    iteration   43: trace = 0.7885783849130661 (0.00423273% change)
+    iteration   44: trace = 0.7885496733308663 (0.003641% change)
+    iteration   45: trace = 0.7885242532821722 (0.0032237% change)
+    iteration   46: trace = 0.7885021806975594 (0.00279927% change)
+    iteration   47: trace = 0.7884826401738191 (0.00247821% change)
+    iteration   48: trace = 0.7884659034224393 (0.00212268% change)
+    iteration   49: trace = 0.7884509126212355 (0.00190128% change)
+    iteration   50: trace = 0.7884373214871218 (0.00172379% change)
+    iteration   51: trace = 0.7884250354999338 (0.00155828% change)
+    iteration   52: trace = 0.7884136365434121 (0.0014458% change)
+    iteration   53: trace = 0.788404020337372 (0.0012197% change)
+    iteration   54: trace = 0.7883953682429767 (0.00109742% change)
+    iteration   55: trace = 0.7883877617685929 (0.000964809% change)
+    iteration   56: trace = 0.7883819628576951 (0.000735543% change)
+    iteration   57: trace = 0.7883776470382999 (0.000547429% change)
+    iteration   58: trace = 0.7883745700313243 (0.000390297% change)
+    iteration   59: trace = 0.7883722689337669 (0.000291879% change)
+    iteration   60: trace = 0.7883704674822304 (0.000228503% change)
+    iteration   61: trace = 0.7883690935960121 (0.000174269% change)
+    iteration   62: trace = 0.788368024567072 (0.0001356% change)
+    iteration   63: trace = 0.7883672165240267 (0.000102496% change)
+    iteration   64: trace = 0.7883665941370616 (7.89464e-05% change)
+    iteration   65: trace = 0.7883660957024822 (6.32237e-05% change)
+    iteration   66: trace = 0.7883657108951734 (4.88107e-05% change)
+    iteration   67: trace = 0.7883653811273231 (4.18293e-05% change)
+    iteration   68: trace = 0.7883650926052406 (3.65975e-05% change)
+    iteration   69: trace = 0.7883648587116775 (2.96682e-05% change)
+    iteration   70: trace = 0.7883647768015397 (1.03899e-05% change)
+    iteration   71: trace = 0.7883646838504431 (1.17904e-05% change)
+    iteration   72: trace = 0.7883645685698817 (1.46227e-05% change)
+    iteration   73: trace = 0.7883644815097633 (1.10431e-05% change)
+    iteration   74: trace = 0.7883643798141352 (1.28996e-05% change)
+    iteration   75: trace = 0.7883643196573104 (7.63059e-06% change)
+Finished solving for bands 21 to 30 after 75 iterations.
+Finished k-point with 50.3333 mean iterations/band.
+zevenfreqs:, 1, 0.3, 0, 0, 0.3, 0.145224, 0.150935, 0.152258, 0.155979, 0.156713, 0.163504, 0.163937, 0.173226, 0.173291, 0.184207, 0.184178, 0.195841, 0.19612, 0.208142, 0.208226, 0.220275, 0.220489, 0.231897, 0.23203, 0.241306, 0.241768, 0.24575, 0.264942, 0.270213, 0.292267, 0.29402, 0.295046, 0.298242, 0.298362, 0.299036
+elapsed time for k point: 34 minutes, 14 seconds.
+zevenvelocity:, 1, #(0.3519219180936711 -1.945612385982531e-6 -1.4096912379906312e-6), #(0.3847946388266974 -3.424131698853764e-5 -1.5832842989292046e-6), #(0.38081201604828546 4.8925360273784354e-5 -1.3060832327187988e-6), #(0.3586925982625743 -2.891666516933739e-4 -1.3147065573476755e-6), #(0.3550012589551684 3.137414093809298e-4 -1.7680101705329312e-6), #(0.31963879223977604 -8.705274865388028e-4 -1.6136330526828377e-6), #(0.32222163198254256 8.779014546391448e-4 -1.4140192158177962e-6), #(0.28028904138955196 -0.007867298838300592 -1.4662882012059359e-6), #(0.2841700081844318 0.007871487575568338 -1.5840364687248185e-6), #(0.2471305594383294 0.15485095420797854 -3.4291367391823644e-6), #(0.24210738027889933 -0.15487168018831182 3.086297659100166e-7), #(0.21016162371309086 -0.002514031274813712 -1.5814993196559931e-6), #(0.20872725072108184 0.0025153293630920995 -1.5831326646498795e-6), #(0.1785749875712905 -0.008483641771410698 -1.3533009364546818e-6), #(0.1760409257051368 0.008478764744776225 -1.7645983365056252e-6), #(0.1470620639573037 -0.002734241451075143 -1.4948019376390563e-6), #(0.14694704314195894 0.002732679529098504 -1.4765954651055758e-6), #(0.11681566617762854 -0.0014262477839044056 -1.2310506057194893e-6), #(0.1166057031181388 0.0014282194312938558 -1.3206724805332848e-6), #(0.08725116397507582 -0.0010431364169373066 -1.107006892328646e-6), #(0.08365911496195744 0.0010610347100735026 -7.26167375566754e-7), #(0.06668900173891609 9.21441700184746e-6 -6.152104966088941e-7), #(-0.24375442893327967 1.2652411347170813e-5 2.1408570598632387e-6), #(0.011152711995745138 -1.7884338848286866e-5 5.81367395976769e-9), #(0.008108762598694405 -5.9208736723685705e-5 1.706406850497401e-7), #(-0.10790732298387223 -2.4806064117407676e-4 4.37616392782186e-6), #(-0.0321461361821412 1.236679425745525e-4 1.9598766499067928e-6), #(-0.1634571035072766 5.102540268094389e-4 4.5344507314836106e-6), #(-0.21287195551721136 -5.357509191125041e-4 9.308242822312523e-6), #(-0.16770536105856468 -2.1110083111567328e-4 3.0807164719915564e-6)
+Calling integral-rho-holes-list-first-row...
+does the surface integral of rho = (Etangentail)^2 + (Dnormal)^2/(eps1*eps2) on cylinders in first row
+calculates |int[alpha2]|^2
+the first row consists of two holes, saved in holes-list-first-row-a and holes-list-first-row-b
+do the integrals on each hole taking spatial phase into account, but add the two contributions incoherently
+holes-list-first-row-a contains 1 cylinders 
+holes-list-first-row-b contains 1 cylinders 
+Resetting integral-value to zero...
+Calculating integral-value for z grid points in the slab...
+...using grid parameters: dtheta=0.017453292519943295 (360.0) dz=0.03333333333333333 (17) 
+Getting efield for band 23
+Integrating tangential component of efield on hole edges for holes-list-first-row-a... 
+     ...answer is -0.011152683362994034+7.990617010833569e-5i 
+Resetting integral-value to zero...
+Integrating tangential component of efield on hole edges for holes-list-first-row-b... 
+     ...answer is -0.01116628210695235+7.111236017263627e-5i 
+Resetting integral-value to zero...
+Getting dfield for band 23
+Integrating normal component of dfield on hole edges for holes-list-first-row-a... 
+     ...answer is -0.04263472398083419+4.06869609534758e-4i 
+Resetting integral-value to zero...
+Integrating normal component of dfield on hole edges for holes-list-first-row-b... 
+     ...answer is -0.042411543983886475+9.504963029014704e-4i 
+Using epsilon values 12.1104 and 1.0
+Resetting integral-value to zero...
+Taking square of integral-value
+integral-rho-holes-list-first-row:, Band, 23, k-point, 0.3, 0.0, 0.0, tangential-efield-hole-a, -0.011152683362994034+7.990617010833569e-5i, tangential-efield-hole-b, -0.01116628210695235+7.111236017263627e-5i, normal-dfield-hole-a, -0.0035205050188956756+3.3596711052876696e-5i, normal-dfield-hole-b, -0.0035020762306683904+7.84859544607503e-5i, integral-value, 4.3049845617104405e-4
+Calling integral-rho-holes-list-second-row...
+does the surface integral of rho = (Etangentail)^2 + (Dnormal)^2/(eps1*eps2) on cylinders in second row
+calculates |int[alpha2]|^2
+the second row consists of two holes, saved in holes-list-second-row-a and holes-list-second-row-b
+do the integrals on each hole taking spatial phase into account, but add the two contributions incoherently
+holes-list-second-row-a contains 1 cylinders 
+holes-list-second-row-b contains 1 cylinders 
+Resetting integral-value to zero...
+Calculating integral-value for z grid points in the slab...
+...using grid parameters: dtheta=0.017453292519943295 (360.0) dz=0.03333333333333333 (17) 
+Getting efield for band 23
+Integrating tangential component of efield on hole edges for holes-list-second-row-a... 
+     ...answer is 3.8086835190867926e-7-2.51603718890251e-6i 
+Resetting integral-value to zero...
+Integrating tangential component of efield on hole edges for holes-list-second-row-b... 
+     ...answer is -9.991654384745615e-7-4.448606988539439e-6i 
+Resetting integral-value to zero...
+Getting dfield for band 23
+Integrating normal component of dfield on hole edges for holes-list-second-row-a... 
+     ...answer is -2.548308059651453e-5-8.210438672156147e-5i 
+Resetting integral-value to zero...
+Integrating normal component of dfield on hole edges for holes-list-second-row-b... 
+     ...answer is -1.558904487213235e-5-7.941806307050115e-5i 
+Using epsilon values 12.1104 and 1.0
+Resetting integral-value to zero...
+Taking square of integral-value
+integral-rho-holes-list-second-row:, Band, 23, k-point, 0.3, 0.0, 0.0, tangential-efield-hole-a, 3.8086835190867926e-7-2.51603718890251e-6i, tangential-efield-hole-b, -9.991654384745615e-7-4.448606988539439e-6i, normal-dfield-hole-a, -2.1042311233744987e-6-6.779659360678547e-6i, normal-dfield-hole-b, -1.2872444239771063e-6-6.557839796414746e-6i, integral-value, 2.1574949447311211e-10
+Calling integral-rho-holes-list-third-row...
+does the surface integral of rho = (Etangentail)^2 + (Dnormal)^2/(eps1*eps2) on cylinders in third row
+calculates |int[alpha2]|^2
+the third row consists of two holes, saved in holes-list-third-row-a and holes-list-third-row-b
+do the integrals on each hole taking spatial phase into account, but add the two contributions incoherently
+holes-list-third-row-a contains 1 cylinders 
+holes-list-third-row-b contains 1 cylinders 
+Resetting integral-value to zero...
+Calculating integral-value for z grid points in the slab...
+...using grid parameters: dtheta=0.017453292519943295 (360.0) dz=0.03333333333333333 (17) 
+Getting efield for band 23
+Integrating tangential component of efield on hole edges for holes-list-third-row-a... 
+     ...answer is 8.008521070102834e-5-2.9364951887001913e-7i 
+Resetting integral-value to zero...
+Integrating tangential component of efield on hole edges for holes-list-third-row-b... 
+     ...answer is 8.131643406385114e-5-6.382429128067575e-7i 
+Resetting integral-value to zero...
+Getting dfield for band 23
+Integrating normal component of dfield on hole edges for holes-list-third-row-a... 
+     ...answer is 1.3856076031497873e-4-4.435968925904958e-7i 
+Resetting integral-value to zero...
+Integrating normal component of dfield on hole edges for holes-list-third-row-b... 
+     ...answer is 1.374091405860908e-4-1.5569573716799827e-6i 
+Using epsilon values 12.1104 and 1.0
+Resetting integral-value to zero...
+Taking square of integral-value
+integral-rho-holes-list-third-row:, Band, 23, k-point, 0.3, 0.0, 0.0, tangential-efield-hole-a, 8.008521070102834e-5-2.9364951887001913e-7i, tangential-efield-hole-b, 8.131643406385114e-5-6.382429128067575e-7i, normal-dfield-hole-a, 1.144146851590193e-5-3.662941707875015e-8i, normal-dfield-hole-b, 1.134637506491039e-5-1.2856366195005801e-7i, integral-value, 1.6964226280610764e-8
+Calling integral-gamma-holes-list-first-row...
+...does |int[Etan]|^2+|int[Eout]|^2+|int[Dnorm]|^2/ep1      + |int[Etan]|^2+|int[Eout]|^2+|int[Dnorm]|^2/ep2
+the first row consists of two holes, saved in holes-list-first-row-a and holes-list-first-row-b
+do the integrals on each hole taking spatial phase into account, but add the two contributions incoherently
+holes-list-first-row-a contains 1 cylinders 
+holes-list-first-row-b contains 1 cylinders 
+Resetting integral-value to zero...
+Calculating integral-value for z grid points in the slab...
+...using grid parameters: dtheta=0.017453292519943295 (360.0) dz=0.03333333333333333 (17) 
+Getting efield for band 23
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          

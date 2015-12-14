@@ -15,7 +15,7 @@ from photonicCrystalDesign import PhCWDesign
 # according to a set of stopping conditions
 # and returns the optimized vectors as a set of pcw solutions
 
-class DeOptimizer(Optimizer):
+class GradientDescentOptimizer(Optimizer):
     __metaclass__ = ABCMeta
 
 
@@ -43,6 +43,7 @@ class DeOptimizer(Optimizer):
             j += 1
             # print vector
             self.objective_function.evaluate(pcw)
+            original_fom = str(pcw.figures_of_merit)
             print "\nInitial score: " + str(pcw.score)
             # could keep track of scores
             i = 1
@@ -58,21 +59,27 @@ class DeOptimizer(Optimizer):
                                          alpha_scaler)
 
                 #vector = check_pcw.solution_vector
-                new_vector_score = result.score
+
                 if check_pcw.score <= result.score:
-                    i = 6
+                    i = max_iterations
                     # This results means that the solution is approximately convergent to a local minima
                     print "Divergent iteration results"
                     print vector
                     print "\nFinal Score: " + str(check_pcw.score)
                     print "Total Improvement: " + str(pcw.score - check_pcw.score)
+                    print "Original FOM: " + original_fom
+                    print "New FOM: " + str(result.figures_of_merit)
+                    check_pcw = result
 
                 else:
-                    print "\nIiteration " + str(i) + "of " + str(max_iterations) + " results"
+                    print "\nIiteration " + str(i) + " of " + str(max_iterations) + " results"
                     print vector
                     print "\nScore: " + str(result.score)
                     print "Total Improvement: " + str(check_pcw.score - result.score)
+                    print "Original FOM: " + original_fom
+                    print "New FOM: " + str(result.figures_of_merit)
                     check_pcw = result
+
                 i += 1
 
             # store our vector in a set of solutions
@@ -102,7 +109,7 @@ class DeOptimizer(Optimizer):
 
         # create next_vector to be used in gradient descent
         next_pcw = pcw.copy_phc()
-        default_pcw = pcw.copy_phc
+        default_pcw = pcw.copy_phc()
 
         # the inner product is used to to verify that the wolfe conditions are satisfied
         gradient_innerProduct_terms = {}
@@ -123,7 +130,7 @@ class DeOptimizer(Optimizer):
         # Code for calculating the Hessian is also commented below
         """
         vector = next_pcw.solution_vector
-        next_vector = vector.copy
+        next_vector = vector.copy()
         print "\nEvaluating gradient..."
         for key in vector.keys():
             print key + "..."
@@ -145,12 +152,11 @@ class DeOptimizer(Optimizer):
             # +h finite difference for f(x + delta), where x is the current key
             vectorPlusDeltaKey = vector.copy()
             vectorPlusDeltaKey[key] = vectorPlusDeltaKey[key] + delta
+            pcw_with_vector_plus = next_pcw.copy_phc()
+            pcw_with_vector_plus.solution_vector[key] = pcw_with_vector_plus.solution_vector[key] + delta
+            self.objective_function.evaluate(pcw_with_vector_plus)
             # constraints.fix(vectorPlusDeltaKey, constraintFunctions)
-            deltaPlusScore = (self.objective_function.evaluate(vectorPlusDeltaKey)[0])
-
-            # attempt to deal with parsing errors by recalculating deltaPlusScore
-            if deltaPlusScore > 10000:
-                       deltaPlusScore = (self.objective_function.evaluate(vectorPlusDeltaKey)[0])
+            deltaPlusScore = pcw_with_vector_plus.score
 
 
             # Below is the first order partial derivative in key
@@ -181,7 +187,7 @@ class DeOptimizer(Optimizer):
             # print key + ": " + str(next_vector[key]) # sanity check
 
             # update next_vector
-            next_vector[key] = max(vector[key] - gradientValues[key])
+            next_vector[key] = vector[key] - gradientValues[key]
             #                                alpha_scaler*
 
             # print "Finite Difference: " + str(next_vector[key] - vector[key])
@@ -203,8 +209,8 @@ class DeOptimizer(Optimizer):
 
         next_pcw.solution_vector = next_vector
         next_pcw.constrain()
-        next_pcw.evaluate()
-        next_score = next_pcw.score()
+        self.objective_function.evaluate(next_pcw)
+        next_score = next_pcw.score
 
         # compute gradient_innerProduct
 
@@ -231,8 +237,8 @@ class DeOptimizer(Optimizer):
 
             next_pcw.solution_vector = next_vector
             next_pcw.constrain()
-            next_pcw.evaluate()
-            next_score = next_pcw.score()
+            self.objective_function.evaluate(next_pcw)
+            next_score = next_pcw.score
 
 
             print "\n" + str(alpha_scaler)
@@ -262,7 +268,7 @@ class DeOptimizer(Optimizer):
                 ascent_vector[key] = (vector[key] - (ascent_scaler)*gradientValues[key])
 
             next_pcw.constrain()
-            next_pcw.evaluate()
+            self.objective_function.evaluate(next_pcw)
             ascent_score = next_pcw.score
             gradient_factor = completion_scaler*ascent_scaler*gradient_innerProduct
 
@@ -276,8 +282,8 @@ class DeOptimizer(Optimizer):
                 for key in vector.keys():
                     ascent_vector[key] = min( [ 1, (next_vector[key] - (ascent_scaler)*gradientValues[key])])
                 next_pcw.solution_vector = ascent_vector
-                next_pcw.constrain
-                next_pcw.evaluate
+                next_pcw.constrain()
+                self.objective_function.evaluate(next_pcw)
                 ascent_score = next_pcw.score
 
                 print "Scaling Ascent"
@@ -292,6 +298,7 @@ class DeOptimizer(Optimizer):
                 return next_pcw
 
 
+        return next_pcw
 
         # Below is an implementation of the Cauchy Point method
         # for path choice of gradient descent
@@ -309,4 +316,4 @@ class DeOptimizer(Optimizer):
         #
         """
 
-        return [next_vector, next_score]
+
