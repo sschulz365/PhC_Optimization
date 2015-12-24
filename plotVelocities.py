@@ -6,10 +6,12 @@ import csv
 import math
 import subprocess
 
-inputfile = "/Users/sean/UniversityOfOttawa/Photonics/MPBproject/results/loss_test.txt"
-outputfile = "/Users/sean/UniversityOfOttawa/Photonics/MPBproject/results/test_loss.gv.csv"
-
-subprocess.call("grep tevelocity " + inputfile + " > " + outputfile,shell=True)
+inputfile = "/Users/sean/UniversityOfOttawa/Photonics/PCWO/GBP_verified_3d_8.txt"
+outputfile = "/Users/sean/UniversityOfOttawa/Photonics/PCWO/GBP_verified_3d_8.gv.csv"
+if "2d" in inputfile:
+    subprocess.call("grep tevelocity " + inputfile + " > " + outputfile,shell=True)
+else:
+    subprocess.call("grep zevenvelocity " + inputfile + " > " + outputfile,shell=True)
 
 band = 23
 velocities = []
