@@ -8,6 +8,7 @@ import subprocess
 
 inputfile = "/Users/sean/UniversityOfOttawa/Photonics/PCWO/GBP_verified_3d_8.txt"
 outputfile = "/Users/sean/UniversityOfOttawa/Photonics/PCWO/GBP_verified_3d_8.gv.csv"
+
 if "2d" in inputfile:
     subprocess.call("grep tevelocity " + inputfile + " > " + outputfile,shell=True)
 else:
@@ -64,7 +65,7 @@ with open(outputfile, 'rb') as csvfile:
     
     ng0 = groupIndexMap[minIndex] # central group index (but not really)
     
-    print "avg group index? " + str(sum(groupIndexMap.values())/len(groupIndexMap.values()))
+    #print "avg group index? " + str(sum(groupIndexMap.values())/len(groupIndexMap.values()))
     
  # compute 'viable' bandwidth range based on feasible group index
     # store the bandwidth identifiers (k points) in potentialBandwidthIndexes

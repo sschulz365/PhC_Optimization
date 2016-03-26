@@ -1,13 +1,10 @@
 import random
 import numpy
 import subprocess
-import constraints
-from experiment import Experiment
-from objectiveFunctions import WeightedSumObjectiveFunction, IdealDifferentialObjectiveFunction
-from waveGuideMPBOptimizer import differentialEvolution, strength_pareto_evolutionary_algorithm, createPopulation, gradientDescentAlgorithm
-import utilities
+from backend import constraints
+from backend.experiment import Experiment
 import math
-import mpbParser
+from backend import mpbParser
 
 
 #Loss Solutions

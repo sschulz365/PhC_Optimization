@@ -1,5 +1,5 @@
-from experiment import Experiment
-from mpbParser import parseObjFunctionParams3D
+from backend.experiment import Experiment
+from backend.mpbParser import parseObjFunctionParams3D
 import math
 
 # absolute path to the mpb executable (necessary on mac yosemite)

@@ -129,6 +129,7 @@ def parseObjFunctionParams(experiment): # input is an experiment
 # The following parser has been defined for the line defect waveguide
 # as specified in output format used for the W1_3D_v1.ctl mpb control file
 # this method parses, Loss, bandwidth, and Group Index and associated output values like loss at ng0 and BGP
+#TODO: merge with parseObjFunctionParams
 def parseObjFunctionParams3D(experiment): # input is an experiment
     outF = open(experiment.outputFile)
     groupIndex = 0
@@ -226,6 +227,11 @@ def parseObjFunctionParams3D(experiment): # input is an experiment
 
     return extractFOM(experiment,lossMap, lossContrastMap, groupIndexMap, bandwidths, "MAXGBP")
 
+
+# The following parser has been defined in order to abstract the FOM extraction
+# from the parsing of the values themselves
+# The way in which FOM are extracted can be specified with the 'mode' field
+# TODO: implement mode
 def extractFOM(experiment, lossMap, lossContrastMap, groupIndexMap, bandwidths, mode):
      # The following section determines the group index
     maxBandwidthRatio = 0

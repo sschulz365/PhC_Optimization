@@ -9,6 +9,6 @@ constraintFunctions = [constraints.latticeConstraintsLD]
 
 print "Testing constraints"
 
-waveGuideMPBOptimizer.createPopulation(constraintFunctions, 1000000, solution)
+waveGuideMPBOptimizer.createPopulation(constraintFunctions, 10000, solution)
 
 print "Test Passed"

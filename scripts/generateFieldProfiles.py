@@ -1,8 +1,11 @@
 #generate Feild Profiles
 
 
-from experiment import Experiment
-from objectiveFunctions import weightedSumObjectiveFunction, weightedSumObjectiveFunction3D
+from backend.experiment import Experiment
+import subprocess
+import matplotlib.pyplot as plt
+import csv
+import math
 import subprocess
 
 print "Generating Solution Field Profiles..."
@@ -48,10 +51,7 @@ experiment.perform()
 
 subprocess.call("grep tefreqs " + experiment.outputFile + " > " + outputCSV,shell=True)
 
-import matplotlib.pyplot as plt
-import csv
-import math
-import subprocess
+
 
 print "\nGenerating Group Index Plot..."
 
@@ -61,6 +61,8 @@ outputGV = outputFilePrefix + ".gv.csv"
 
 
 subprocess.call("grep tevelocity " + inputText + " > " + outputGV,shell=True)
+
+
 
 band = 23
 velocities = []

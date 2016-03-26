@@ -1,16 +1,12 @@
 #Sean Billings, 2015
-import random
-import numpy
-import subprocess
-import constraints
-from experiment import Experiment
-from objectiveFunctions import WeightedSumObjectiveFunction, IdealDifferentialObjectiveFunction
-from waveGuideMPBOptimizer import differentialEvolution, createPopulation, gradientDescentAlgorithm
+
+from backend import constraints
+from backend.experiment import Experiment
+from backend.objectiveFunctions import WeightedSumObjectiveFunction, IdealDifferentialObjectiveFunction
 import math
-from spea_optimizer import SpeaOptimizer
-from photonicCrystalDesign import PhCWDesign
-from paretoFunctions import ParetoMaxFunction
-from photonicCrystalDesign import PhCWDesign
+from backend.spea_optimizer import SpeaOptimizer
+from backend.paretoFunctions import ParetoMaxFunction
+from backend.photonicCrystalDesign import PhCWDesign
 
 
 # absolute path to the mpb executable

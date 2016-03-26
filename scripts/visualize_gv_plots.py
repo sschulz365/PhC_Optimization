@@ -10,15 +10,15 @@ import csv
 import math
 import subprocess
 
-from experiment import Experiment
-import mpbParser
+from backend.experiment import Experiment
+import backend.mpbParser
 
 # absolute path to the mpb executable (necessary on mac yosemite)
 # 'mpb' should instead be used on linux
 mpb = "/Users/sean/documents/mpb-1.5/mpb/mpb"
 
 # absolute path to the input ctl
-inputFile = "/Users/sean/UniversityOfOttawa/Photonics/MPBproject/W1_2D_v04.ctl.txt" # 2D
+inputFile = "/Users/sean/UniversityOfOttawa/Photonics/PCWO/W1_2D_v04.ctl.txt" # 2D
 
 # absolute path to the output .txt
 outputFile = "/Users/sean/UniversityOfOttawa/Photonics/PCWO/visualize_GBP_2d.txt"

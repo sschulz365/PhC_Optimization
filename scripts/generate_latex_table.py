@@ -1,10 +1,10 @@
 __author__ = 'sean'
 
-from optimizer import Optimizer
-from paretoFunctions import ParetoMaxFunction
-from experiment import Experiment
-import constraints
-from photonicCrystalDesign import PhCWDesign
+
+from backend.paretoFunctions import ParetoMaxFunction
+from backend.experiment import Experiment
+from backend import constraints
+from backend.photonicCrystalDesign import PhCWDesign
 
 # absolute path to the mpb executable
 mpb = "/Users/sean/documents/mpb-1.5/mpb/mpb"
