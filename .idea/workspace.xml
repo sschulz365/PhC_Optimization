@@ -2,26 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22801302-2bd7-43d9-8caa-0b119e33ebf4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HowToBuildPCWOScrypts.ipynb" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/HowToBuildPCWOScrypts.ipynb" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/testSPEA.py" afterPath="$PROJECT_DIR$/deprecatedScripts/testSPEA.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/compare_2d_3d.py" afterPath="$PROJECT_DIR$/scripts/compare_2d_3d.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/evaluate_PCW.py" afterPath="$PROJECT_DIR$/scripts/evaluate_PCW.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/experiment.py" afterPath="$PROJECT_DIR$/backend/experiment.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deprecatedScripts/generateCSVfromSolutions.py" afterPath="$PROJECT_DIR$/deprecatedScripts/generateCSVfromSolutions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/generateFieldProfiles.py" afterPath="$PROJECT_DIR$/scripts/generateFieldProfiles.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deprecatedScripts/generateLossCSVfromSolutions.py" afterPath="$PROJECT_DIR$/deprecatedScripts/generateLossCSVfromSolutions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/generate_latex_table.py" afterPath="$PROJECT_DIR$/scripts/generate_latex_table.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/mpbParser.py" afterPath="$PROJECT_DIR$/backend/mpbParser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/optimizeDelaySolutions.py" afterPath="$PROJECT_DIR$/scripts/optimizeDelaySolutions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/optimizeGBPsolutions.py" afterPath="$PROJECT_DIR$/scripts/optimizeGBPsolutions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/optimizeLossSolutions.py" afterPath="$PROJECT_DIR$/scripts/optimizeLossSolutions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/paretoFunctions.py" afterPath="$PROJECT_DIR$/backend/paretoFunctions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deprecatedScripts/parseParametersFromFile.py" afterPath="$PROJECT_DIR$/deprecatedScripts/parseParametersFromFile.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/W1_2D_v04.ctl.txt-epsilon.h5" afterPath="$PROJECT_DIR$/W1_2D_v04.ctl.txt-epsilon.h5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.ipynb_checkpoints/HowToBuildPCWOScrypts-checkpoint.ipynb" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/HowToBuildPCWOScrypts-checkpoint.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HowToBuildPCWOScrypts.ipynb" afterPath="$PROJECT_DIR$/HowToBuildPCWOScrypts.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/spea_optimizer.py" afterPath="$PROJECT_DIR$/backend/spea_optimizer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/test_spea_optimizer.py" afterPath="$PROJECT_DIR$/scripts/test_spea_optimizer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/visualize_gv_plots.py" afterPath="$PROJECT_DIR$/scripts/visualize_gv_plots.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PCWO.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/test_spea_optimizer.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="76" selection-end-column="92" />
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -65,8 +49,8 @@
       <file leaf-file-name="spea_optimizer.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/spea_optimizer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.989011">
-              <caret line="53" column="17" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.3708791">
+              <caret line="74" column="23" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -123,8 +107,8 @@
         <option value="$PROJECT_DIR$/backend/paretoFunctions.py" />
         <option value="$PROJECT_DIR$/scripts/HowToBuildPCWOScrypts.ipynb" />
         <option value="$PROJECT_DIR$/HowToBuildPCWOScrypts.ipynb" />
-        <option value="$PROJECT_DIR$/backend/spea_optimizer.py" />
         <option value="$PROJECT_DIR$/backend/mpbParser.py" />
+        <option value="$PROJECT_DIR$/backend/spea_optimizer.py" />
       </list>
     </option>
   </component>
@@ -176,6 +160,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="PCWO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PCWO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PCWO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -638,14 +636,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/test_spea_optimizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="76" selection-end-column="92" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/HowToBuildPCWOScrypts.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -663,10 +653,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/test_spea_optimizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/spea_optimizer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.989011">
-          <caret line="53" column="17" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.3708791">
+          <caret line="74" column="23" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
           <folding />
         </state>
       </provider>

@@ -72,7 +72,7 @@ class SpeaOptimizer(Optimizer):
 
 
                 # display solution and results in the console
-                print "\nSolution: " + str(pcw.solution_vector) + "\n"
+                print "Solution: " + str(pcw.solution_vector) + "\n"
 
 
                 print "Objectives: "
