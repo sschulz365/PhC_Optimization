@@ -1,4 +1,4 @@
-from backend.experiment import Experiment
+from backend.experiment import W1Experiment
 from backend.mpbParser import parseObjFunctionParams3D
 import math
 
@@ -29,7 +29,7 @@ solution = {'p2': 0.15849807199408553, 'p3': 0.04275554553220376, 'p1': 0.018720
 # the experiment (instance) is reused between different command line calls, but
 # but the command line parameters are changed between calls
 # see the experiment.py module for more details
-experiment = Experiment(mpb, inputFile, outputFile)
+experiment = W1Experiment(mpb, inputFile, outputFile)
 # ex.setParams(paramVector)
 experiment.setCalculationType('4') # currently only type 4 works for computing
 experiment.setBand(23)

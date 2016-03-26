@@ -1,6 +1,6 @@
 __author__ = 'sean'
 
-from backend.experiment import Experiment
+from backend.experiment import W1Experiment
 from backend import mpbParser
 
 # absolute path to the mpb executable (necessary on mac yosemite)
@@ -15,7 +15,7 @@ print "\n2D LOSS\n"
 inputFile = "/Users/sean/UniversityOfOttawa/Photonics/MPBproject/W1_2D_v04.ctl.txt"
 outputFile = "/Users/sean/UniversityOfOttawa/Photonics/PCWO/loss_verified_2d.txt"
 
-experiment = Experiment(mpb, inputFile, outputFile)
+experiment = W1Experiment(mpb, inputFile, outputFile)
 experiment.setParams(solution)
 experiment.setCalculationType(4)
 experiment.setBand(23)
@@ -34,7 +34,7 @@ print "\n3D Loss\n"
 inputFile = "/Users/sean/Documents/W1_3D_v1.ctl.txt"
 outputFile = "/Users/sean/UniversityOfOttawa/Photonics/PCWO/loss_verified_3d_2.txt"
 
-experiment = Experiment(mpb, inputFile, outputFile)
+experiment = W1Experiment(mpb, inputFile, outputFile)
 experiment.setParams(solution)
 experiment.setCalculationType(4)
 experiment.setBand(23)

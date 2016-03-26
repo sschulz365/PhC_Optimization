@@ -2,7 +2,7 @@ __author__ = 'sean'
 
 
 from backend.paretoFunctions import ParetoMaxFunction
-from backend.experiment import Experiment
+from backend.experiment import W1Experiment
 from backend import constraints
 from backend.photonicCrystalDesign import PhCWDesign
 
@@ -19,7 +19,7 @@ outputFile = "/Users/sean/UniversityOfOttawa/Photonics/PCWO/optimizerTestFile.tx
 # we define a general experiment object
 # that we reuse whenever we need to make a command-line mpb call
 # see experiment.py for functionality
-experiment = Experiment(mpb, inputFile, outputFile)
+experiment = W1Experiment(mpb, inputFile, outputFile)
 # ex.setParams(paramVector)
 experiment.setCalculationType('4') # accepts an int from 0 to 5
 experiment.setBand(23)

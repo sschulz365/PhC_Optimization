@@ -2,7 +2,7 @@ import random
 import numpy
 import subprocess
 from backend import constraints
-from backend.experiment import Experiment
+from backend.experiment import W1Experiment
 import math
 from backend import mpbParser
 
@@ -52,7 +52,7 @@ csv_file = "/Users/sean/UniversityOfOttawa/Photonics/MPBproject/loss_final_solut
 # we define a generalized experiment object
 # that we reuse whenever we need to make a command-line mpb call
 # see experiment.py for functionality
-experiment = Experiment(mpb, inputFile, outputFile)
+experiment = W1Experiment(mpb, inputFile, outputFile)
 # ex.setParams(paramVector)
 experiment.setCalculationType('4') # accepts an int from 0 to 5
 experiment.setBand(23)

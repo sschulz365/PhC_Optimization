@@ -1,7 +1,7 @@
 #generate Feild Profiles
 
 
-from backend.experiment import Experiment
+from backend.experiment import W1Experiment
 import subprocess
 import matplotlib.pyplot as plt
 import csv
@@ -32,7 +32,7 @@ solution = {'r0': 0.273167, 'r1': 0.2, 'r2': 0.2, 'r3': 0.249118, 's3': -0.00344
 # the experiment (instance) is reused between different command line calls,
 # but the command line parameters are changed between calls
 # see the experiment.py module for more details
-experiment = Experiment(mpb, inputFile, outputField)
+experiment = W1Experiment(mpb, inputFile, outputField)
 experiment.setParams(solution)
 experiment.setCalculationType(3) 
 experiment.setBand(23)

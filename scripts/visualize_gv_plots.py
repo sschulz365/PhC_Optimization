@@ -10,7 +10,7 @@ import csv
 import math
 import subprocess
 
-from backend.experiment import Experiment
+from backend.experiment import W1Experiment
 import backend.mpbParser
 
 # absolute path to the mpb executable (necessary on mac yosemite)
@@ -52,7 +52,7 @@ for solution in solutions:
     # the experiment (instance) is reused between different command line calls,
     # but the command line parameters are changed between calls
     # see the experiment.py module for more details
-    experiment = Experiment(mpb, inputFile, outputFile)
+    experiment = W1Experiment(mpb, inputFile, outputFile)
     experiment.setParams(solution)
     experiment.setCalculationType(4)
     experiment.setBand(23)

@@ -119,8 +119,8 @@ def parseObjFunctionParams(experiment): # input is an experiment
 
     #end for (actual parsing)
 
-    print "DEBUG: Loss Map: " + str(lossMap)
-    print "DEBUG: Group Index Map: " + str(groupIndexMap)
+    #print "DEBUG: Loss Map: " + str(lossMap)
+    #print "DEBUG: Group Index Map: " + str(groupIndexMap)
 
     return extractFOM(experiment,lossMap, lossContrastMap, groupIndexMap,bandwidths,"MAXGBP")
 
@@ -454,10 +454,10 @@ def extractFOM(experiment, lossMap, lossContrastMap, groupIndexMap, bandwidths, 
                 if k not in potentialBandwidthIndexes:
                     startRemoving = True
 
-        print "DEBUG: Central Band Region: " + str(potentialBandwidthIndexes) # sanity check
+        #print "DEBUG: Central Band Region: " + str(potentialBandwidthIndexes) # sanity check
         # prepare to compute average loss and bandwidth
 
-        print "DEBUG: ngo index: " + str(ng0_index)
+        #print "DEBUG: ngo index: " + str(ng0_index)
         #print "\n" + "ngo: " + str(ng0)
          # calculate loss at group index
         loss_at_ng0 = lossMap[ng0_index]
@@ -545,12 +545,12 @@ def extractFOM(experiment, lossMap, lossContrastMap, groupIndexMap, bandwidths, 
 
         if delay_gvd_limited < delay_loss_limited:
             delay = delay_gvd_limited
-            print "DEBUG: GVD limited structure"
-            print "DEBUG: Length: " + str(length_gvd_limited * 10) + " mm"
+            #print "DEBUG: GVD limited structure"
+            #print "DEBUG: Length: " + str(length_gvd_limited * 10) + " mm"
         else:
             delay = delay_loss_limited
-            print "DEBUG: Loss limited structure"
-            print "DEBUG: Length: " + str(length_loss_limited * 10) + " mm"
+            #print "DEBUG: Loss limited structure"
+            #print "DEBUG: Length: " + str(length_loss_limited * 10) + " mm"
 
 
         #delay = min(delay_loss_limited, delay_gvd_limited)

@@ -51,11 +51,10 @@ class SpeaOptimizer(Optimizer):
             # because dominance works in terms of maximization, the inverted loss 1/a is used
             for pcw in population:
                 #objective_function_map = {}
-                print "DEBUG: Solution: " + str(pcw.solution_vector)
+                #print "DEBUG: Solution: " + str(pcw.solution_vector)
                 self.pareto_function.evaluate(pcw)
 
-                #experiment.setParams(solution)
-                #experiment.perform()
+
                 objective_function_results = pcw.figures_of_merit
 
                 # objective_function_results is in the form

@@ -25,7 +25,7 @@ class ParetoFunction:
     @abstractmethod
     def dominates(self, solution_a, solution_b): pass
 
-
+# TODO: integrate parser abstraction
 class ParetoMaxFunction(ParetoFunction):
     __metaclass__ = ABCMeta
 

@@ -6,9 +6,11 @@ import mpbParser
 
 # An experiment is a class representation for an mpb command line run
 # by default the mpb run is split across 6 cores, but this can be augments
+
+# should be refactored as W1Experiment
 # and no parameter adjustments
-class Experiment(object):
-        # initializes the Experiment with default parameters (acts as a constructor specification)
+class W1Experiment(object):
+        # initializes the W1Experiment with default parameters (acts as a constructor specification)
         def __init__(self, mpb, inputFile, outputFile):
             """
 
@@ -32,7 +34,7 @@ class Experiment(object):
             self.split = "-split 6"
             self.dim3 = False
 
-        # execute the current instantiation of Experiment as a mpb calculation via the command line
+        # execute the current instantiation of W1Experiment as a mpb calculation via the command line
         def perform(self):
                 # + "-split 4"
 
