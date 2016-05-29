@@ -2,6 +2,7 @@
 # objectiveFunctions
 from mpbParser import parseObjFunctionParams, parseObjFunctionParams3D
 import math
+import os
 from abc import ABCMeta, abstractmethod
 
 # Extendible class for Objective Function
@@ -26,6 +27,8 @@ class ObjectiveFunction:
     # returns a collection of scores/objectives
     @abstractmethod
     def evaluate(self, solution): pass
+
+
 
 
 # Class implementation of the weighted objective function for 2D simulations
@@ -100,24 +103,35 @@ class WeightedSumObjectiveFunction(ObjectiveFunction):
         # evaluate weighted sum objected function and return
         pcw.score = float("{0:.4f}".format(math.sqrt((w1/bandwidth)**2 + (w2/ng0)**2 + (w3*avgLoss)**2 + ((w5*loss_at_ng0)**2) + (w4/gbp)**2 + (w6/delay)**2)))
 
+        self.store_solution(pcw)
 
-            #return [ score, bandwidth, ng0, avgLoss, bgp, loss_at_ng0, delay]
+
+    def store_solution(self, pcw):
+        paramMap = pcw.solution_vector
+        results = pcw.figures_of_merit
+        with open(os.getcwd() + "/pcw_storage.txt","a") as out_file:
+            out_file.write("\n%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s"
+                %(
+                    paramMap["r0"],
+                    paramMap["r1"],
+                    paramMap["r2"],
+                    paramMap["r3"],
+                    paramMap["s1"],
+                    paramMap["s2"],
+                    paramMap["s3"],
+                    paramMap["p1"],
+                    paramMap["p2"],
+                    paramMap["p3"],
+                    results["bandwidth"],
+                    results["ng0"],
+                    results["GBP"],
+                    results["avgLoss"],
+                    results["loss_at_ng0"],
+                    results["delay"]
+            )
+            )
 
 
-    # evaluates the stability of a given solution
-    # relative to the objective function
-    def fabricationStability(self, solution): pass
-    """
-        laplacian = utilities.computeLaplacian(solution, self.evaluate, self.weights, self.experiment)
-        fabrication_coefficient = 0
-        # Compute the L2 norm of the laplacian
-        for term in laplacian.keys():
-          fabrication_coefficient = fabrication_coefficient + (math.fabs(term))
-
-        fabrication_coefficient = math.sqrt(fabrication_coefficient)
-
-        return fabrication_coefficient
-    """
 
 # Class implementation of the weighted objective function for 3D simulations
 # note there is no inclusion of the laplacian (fabrication stability) operator

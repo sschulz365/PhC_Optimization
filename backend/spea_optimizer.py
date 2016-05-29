@@ -233,7 +233,7 @@ class SpeaOptimizer(Optimizer):
         reduced_pareto_set = []
 
         for key in cluster_set.keys():
-            #TODO: do better
+            #TODO: do smarter
             i = random.randint(0,(len(cluster_set[key])-1)) # could also select most central points
             reduced_pareto_set.append(cluster_set[key][i])
 

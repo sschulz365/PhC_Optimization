@@ -2,14 +2,13 @@
 import random
 import numpy
 import subprocess
-import constraints
-from experiment import Experiment
-from objectiveFunctions import WeightedSumObjectiveFunction, IdealDifferentialObjectiveFunction
-from waveGuideMPBOptimizer import differentialEvolution, createPopulation, gradientDescentAlgorithm
+import backend.constraints
+from backend.experiment import W1Experiment
+from backend.objectiveFunctions import WeightedSumObjectiveFunction, IdealDifferentialObjectiveFunction
 import math
-from de_optimizer import DeOptimizer
-from gd_optimizer import GradientDescentOptimizer
-from photonicCrystalDesign import PhCWDesign
+from backend.de_optimizer import DeOptimizer
+from backend.gd_optimizer import GradientDescentOptimizer
+from backend.photonicCrystalDesign import PhCWDesign
 
 paramMap = {}
 paramMap["s1"] = 0 # First row vertical shift
@@ -47,7 +46,7 @@ outputFile = "/Users/sean/UniversityOfOttawa/Photonics/PCWO/optimizerTestFile.tx
 # we define a general experiment object
 # that we reuse whenever we need to make a command-line mpb call
 # see experiment.py for functionality
-experiment = Experiment(mpb, inputFile, outputFile)
+experiment = W1Experiment(mpb, inputFile, outputFile)
 # ex.setParams(paramVector)
 experiment.setCalculationType('4') # accepts an int from 0 to 5
 experiment.setBand(23)
@@ -68,14 +67,14 @@ constraintFunctions = [ constraints.constraintAR1, constraints.constraintAR2,
                         constraints.constraint0R3, constraints.constraint0R0]
 """
 # see constraints.py
-constraintFunctions = [constraints.latticeConstraintsLD]
+constraintFunctions = [backend.constraints.latticeConstraintsLD]
 
 
 pcw = PhCWDesign(paramMap, 0, constraintFunctions)
 
 population_size = 5
 max_iterations = 5 # number of iterations of the DE alg
-descent_scaler = 0.2
+descent_scaler = 0.8
 completion_scaler = 0.1
 alpha_scaler = 0.9
 band = 23 # band of interest for MPB computations
@@ -130,19 +129,15 @@ print "Starting Gradient Descent Optimizer"
 
 
 
-vectors = [{'p2': 0.305666, 'p3': -0.001227, 'p1': 0.226132, 'r0': 0.206906, 'r1': 0.2, 'r2': 0.277454, 'r3': 0.227293, 's3': 0.02537, 's2': 0.161428, 's1': 0.198186},
-                {'p2': 0.007214, 'p3': 0.005759, 'p1': -0.13563, 'r0': 0.232891, 'r1': 0.200274, 'r2': 0.383745, 'r3': 0.2, 's3': -0.065504, 's2': -0.075669, 's1': -0.069502},
-                {'p2': 0.178779, 'p3': 0.030888, 'p1': 0.124599, 'r0': 0.2279, 'r1': 0.237683, 'r2': 0.4, 'r3': 0.2, 's3': 0.076104, 's2': -0.097843, 's1': 0.063663},
-                {'p2': -0.125797, 'p3': -0.050961, 'p1': 0.131258, 'r0': 0.2, 'r1': 0.2, 'r2': 0.280327, 'r3': 0.259032, 's3': -0.053, 's2': -0.141022, 's1': -0.151103},
-                {'p2': 0.005009, 'p3': 0.004437, 'p1': -0.13563, 'r0': 0.232891, 'r1': 0.2, 'r2': 0.383745, 'r3': 0.2, 's3': -0.065504, 's2': -0.075669, 's1': -0.069502},
-                {'p2': 0.211272, 'p3': -0.042682, 'p1': 0.124599, 'r0': 0.2, 'r1': 0.2, 'r2': 0.310876, 'r3': 0.2, 's3': -0.078033, 's2': -0.095436, 's1': -0.13246},
-                {'p2': 0.005009, 'p3': 0.004437, 'p1': -0.141671, 'r0': 0.237322, 'r1': 0.203036, 'r2': 0.383745, 'r3': 0.2, 's3': -0.046694, 's2': -0.101481, 's1': -0.062471},
-                {'p2': 0.005009, 'p3': 0.006596, 'p1': -0.135418, 'r0': 0.237322, 'r1': 0.2, 'r2': 0.383745, 'r3': 0.2, 's3': -0.046694, 's2': -0.094858, 's1': -0.062471},
-                {'p2': 0.169217, 'p3': 0.030888, 'p1': 0.124599, 'r0': 0.2279, 'r1': 0.237683, 'r2': 0.4, 'r3': 0.2, 's3': 0.094071, 's2': -0.097843, 's1': 0.063663},
-                {'p2': 0.005009, 'p3': 0.006596, 'p1': -0.115785, 'r0': 0.237322, 'r1': 0.2, 'r2': 0.383745, 'r3': 0.2, 's3': -0.046694, 's2': -0.101481, 's1': -0.062471},
-                {'p2': -0.183314, 'p3': -0.050542, 'p1': -0.141671, 'r0': 0.2, 'r1': 0.260604, 'r2': 0.355695, 'r3': 0.2, 's3': 0.080771, 's2': -0.092188, 's1': -0.134903},
-                {'p2': -0.209395, 'p3': 7.5e-05, 'p1': -0.152738, 'r0': 0.2, 'r1': 0.203047, 'r2': 0.276094, 'r3': 0.213233, 's3': -0.020123, 's2': -0.109988, 's1': -0.108935},
-                {'p2': -0.210475, 'p3': -0.042662, 'p1': -0.162253, 'r0': 0.2, 'r1': 0.2, 'r2': 0.264382, 'r3': 0.231593, 's3': -0.070369, 's2': -0.153377, 's1': -0.12171}]
+vectors = [{'p2': 0.014115, 'p3': 0.045876, 'p1': 0.045209, 'r0': 0.244875, 'r1': 0.2, 'r2': 0.383745, 'r3': 0.2, 's3': -0.059986, 's2': -0.094858, 's1': -0.062471},
+{'p2': -0.183314, 'p3': 0.041983, 'p1': -0.159294, 'r0': 0.2, 'r1': 0.25053, 'r2': 0.341765, 'r3': 0.2, 's3': 0.080771, 's2': -0.101123, 's1': -0.126011},
+{'p2': 0.115662, 'p3': 0.024481, 'p1': -0.134189, 'r0': 0.246696, 'r1': 0.237683, 'r2': 0.4, 'r3': 0.2, 's3': 0.094071, 's2': -0.100857, 's1': 0.088909},
+{'p2': 0.169172, 'p3': 0.035936, 'p1': 0.076802, 'r0': 0.321075, 'r1': 0.2, 'r2': 0.4, 'r3': 0.205405, 's3': -0.052867, 's2': -0.033866, 's1': 0.076147},
+{'p2': -0.16769, 'p3': -0.057616, 'p1': 0.110235, 'r0': 0.244108, 'r1': 0.2, 'r2': 0.294188, 'r3': 0.272386, 's3': -0.078033, 's2': -0.064043, 's1': -0.063286},
+{'p2': -0.183304, 'p3': -0.050531999999999994, 'p1': -0.14166099999999998, 'r0': 0.20001000000000002, 'r1': 0.260614, 'r2': 0.355705, 'r3': 0.20001000000000002, 's3': 0.08078099999999999, 's2': -0.09217800000000001, 's1': -0.13489299999999999}
+]
+
+
 
 population = GradientDescentOptimizer.createPopulation(len(vectors), pcw)
 i = 0

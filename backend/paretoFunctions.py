@@ -2,6 +2,7 @@
 
 from mpbParser import parseObjFunctionParams, parseObjFunctionParams3D
 import math
+import os
 from abc import ABCMeta, abstractmethod
 from photonicCrystalDesign import PhCWDesign
 
@@ -78,6 +79,8 @@ class ParetoMaxFunction(ParetoFunction):
 
         pcw.score = 0
 
+        self.store_solution(pcw.solution_vector, results)
+
     def set_keys(self, key_list):
         """
         Redefines the set of keys under consideration
@@ -104,6 +107,30 @@ class ParetoMaxFunction(ParetoFunction):
                 return False
 
         return True
+
+    def store_solution(self, paramMap, results):
+
+        with open(os.getcwd() + "/pcw_storage.txt","a") as out_file:
+            out_file.write("\n%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s"
+                %(
+                    paramMap["r0"],
+                    paramMap["r1"],
+                    paramMap["r2"],
+                    paramMap["r3"],
+                    paramMap["s1"],
+                    paramMap["s2"],
+                    paramMap["s3"],
+                    paramMap["p1"],
+                    paramMap["p2"],
+                    paramMap["p3"],
+                    results["bandwidth"],
+                    results["ng0"],
+                    results["GBP"],
+                    results["avgLoss"],
+                    results["loss_at_ng0"],
+                    results["delay"]
+            )
+            )
 
 
 

@@ -1,5 +1,6 @@
 # Sean Billings, 2015
 import math
+import os
 
 
 # The following parser has been defined for the line defect waveguide
@@ -567,5 +568,4 @@ def extractFOM(experiment, lossMap, lossContrastMap, groupIndexMap, bandwidths, 
         output_map["delay"] = float("{0:.4f}".format(delay))
 
         return output_map
-
 

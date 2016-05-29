@@ -27,7 +27,7 @@ class Optimizer(object):
         see paramMap in runOptimizer.py for a population sample example
         """
 
-        population = [pcw_archetype.copy_phc() for i in range (0, population_size)]
+        population = [pcw_archetype.copy_phc for i in range (0, population_size)]
         for i in range(0, population_size):
             assert isinstance(population[i], PhCWDesign)
             new_vector =  population[i].solution_vector.copy()

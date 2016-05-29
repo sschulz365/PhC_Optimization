@@ -21,9 +21,10 @@ class PhCWDesign(object):
         def set_objectives(self, new_objectives):
             self.figures_of_merit = new_objectives
 
+        @property
         def copy_phc(self):
-            new_phc = PhCWDesign(self.solution_vector, self.score, self.constraints)
-            new_phc.set_objectives(self.figures_of_merit)
+            new_phc = PhCWDesign(self.solution_vector.copy(), self.score, self.constraints)
+            new_phc.set_objectives(self.figures_of_merit.copy())
             return new_phc
 
 

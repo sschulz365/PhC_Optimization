@@ -47,18 +47,18 @@ class GradientDescentOptimizer(Optimizer):
             print "\nInitial score: " + str(pcw.score)
             # could keep track of scores
             i = 1
-            check_pcw = pcw.copy_phc()
+            check_pcw = pcw.copy_phc
+            prev_pcw = check_pcw.copy_phc
             while i <= max_iterations:
                 print "\n\nIteration: " + str(i)
                 # the Gradient Descent method recursively improves 'vector' until a stopping condition is met
                 # (see above for method specifications)
 
-                result = self.gradientDescent(pcw,
+                result = self.gradientDescent(check_pcw,
                                          descent_scaler,
                                          completion_scaler,
                                          alpha_scaler)
 
-                #vector = check_pcw.solution_vector
 
                 if check_pcw.score <= result.score:
                     i = max_iterations
@@ -69,7 +69,7 @@ class GradientDescentOptimizer(Optimizer):
                     print "Total Improvement: " + str(pcw.score - check_pcw.score)
                     print "Original FOM: " + original_fom
                     print "New FOM: " + str(result.figures_of_merit)
-                    check_pcw = result
+                    check_pcw = prev_pcw
 
                 else:
                     print "\nIiteration " + str(i) + " of " + str(max_iterations) + " results"
@@ -78,6 +78,7 @@ class GradientDescentOptimizer(Optimizer):
                     print "Total Improvement: " + str(check_pcw.score - result.score)
                     print "Original FOM: " + original_fom
                     print "New FOM: " + str(result.figures_of_merit)
+                    prev_pcw = check_pcw.copy_phc
                     check_pcw = result
 
                 i += 1
@@ -101,33 +102,25 @@ class GradientDescentOptimizer(Optimizer):
                         completion_scaler, alpha_scaler):
 
         #establish the base score to improve upon
-        current_score = pcw.score
+        initial_score = pcw.score
 
-        if current_score > 10000: # arbitrary max score
+        if initial_score > 10000: # arbitrary max score
             print "\nDescent not achievable"
             return pcw
 
         # create next_vector to be used in gradient descent
-        next_pcw = pcw.copy_phc()
-        default_pcw = pcw.copy_phc()
+        next_pcw = pcw.copy_phc
+        initial_pcw = pcw.copy_phc
 
         # the inner product is used to to verify that the wolfe conditions are satisfied
         gradient_innerProduct_terms = {}
         gradientValues = {}
 
+
         """
-        # the hessian can be used instead of the Identity matrix in computing the descent direction
-        # more details can be found in Numerical Optimization : Nocedal, Wright In the section on line methods
-        # in any case it would be far more efficient to approximate the hessian with the laplacian
-
-        # hessianValues[key] = {}
-
-
         # In the following we compute the partial derivatives
         # of the objective function, with respect to the parameters,
         # and store the terms as a representation of the gradient in gradientValues
-
-        # Code for calculating the Hessian is also commented below
         """
         vector = next_pcw.solution_vector
         next_vector = vector.copy()
@@ -150,23 +143,22 @@ class GradientDescentOptimizer(Optimizer):
             """
             # The following code implements:
             # +h finite difference for f(x + delta), where x is the current key
-            vectorPlusDeltaKey = vector.copy()
-            vectorPlusDeltaKey[key] = vectorPlusDeltaKey[key] + delta
-            pcw_with_vector_plus = next_pcw.copy_phc()
+
+            pcw_with_vector_plus = next_pcw.copy_phc
             pcw_with_vector_plus.solution_vector[key] = pcw_with_vector_plus.solution_vector[key] + delta
             self.objective_function.evaluate(pcw_with_vector_plus)
-            # constraints.fix(vectorPlusDeltaKey, constraintFunctions)
+
             deltaPlusScore = pcw_with_vector_plus.score
 
 
             # Below is the first order partial derivative in key
             # computed by forward finite difference
 
-            gradientValues[key] = ((deltaPlusScore - current_score) / delta ) *0.00001
+            gradientValues[key] = float("{0:.6f}".format( (deltaPlusScore - initial_score)  * ( 0.00001/delta)))
 
             # removing delta is incorrect, but it can help the scaling of score output
             # multiplying by 0.00001 helps scale the gradient into the constrained bounds of [0,1]
-            # this initial scaling is dealt with during the augmented backtracking algorithm section
+            # this initial scaling is handled during the augmented backtracking approach below
 
 
             # Below is the first order partial derivative in key
@@ -175,33 +167,18 @@ class GradientDescentOptimizer(Optimizer):
             gradientValues[key] = ((deltaPlusScore - deltaMinusScore) / 2*delta) * 0.0001
             """
 
-            # second order approximated partial derivative in key (x)
-            # approximated by 2nd order central
-            # used to approximate Hessian (maybe with the Laplacian) potentially
-            """
-            f''(x) = f(x + delta) - 2f(x) + f(x-delta) / delta^2
-
-            hessianValues[key] = (deltaPlusScore - 2*currentScore + deltaMinusScore) / delta**2
-            """
-
-            # print key + ": " + str(next_vector[key]) # sanity check
 
             # update next_vector
             next_vector[key] = vector[key] - gradientValues[key]
             #                                alpha_scaler*
-
-            # print "Finite Difference: " + str(next_vector[key] - vector[key])
-
-            # constraints.fix(next_vector, constraintFunctions)
 
             # update gradient_innerProduct_terms
             gradient_innerProduct_terms[key] = (-1)*(gradientValues[key]**2)
 
         # end gradient calculation
 
-        print "\nGradient Computed" # + str(gradientValues)
-
-        # print "Gradient and Hessian Computed" # in case of hessian calculation
+        print "Gradient Computed" # + str(gradientValues)
+        print "Gradient: " + str(gradientValues)
 
 
         # under steepest desecent:
@@ -218,17 +195,24 @@ class GradientDescentOptimizer(Optimizer):
         for key in gradient_innerProduct_terms.keys():
             gradient_innerProduct += gradient_innerProduct_terms[key]
 
+        if gradient_innerProduct > -0.000001:
+            return initial_pcw
+
         #the gradient factor is defined by Grad(f_k) transpose applied to p_k
         # it is therefore the gradient inner product because p_k is defined as - grad(f_k)
         gradient_factor = completion_scaler*alpha_scaler*gradient_innerProduct
-        print "\nGradient Factor: " + str(gradient_factor)
-
+        print "Gradient Factor: " + str(gradient_factor)
 
         # THE FOLLOWING COULD BE IMPROVED WITH THE FORMALISM OF
         # NONLINEAR CONDITIONAL OPTIMIZATION
         attempts = 0
         print "\nScaling Descent\n"
-        while next_score > (current_score + gradient_factor) and attempts < 5:
+        print "Score: " + str(next_score)
+
+        #gradient factor is negative
+        descent_score = initial_score
+        while next_score > (descent_score + gradient_factor) and attempts < 4:
+
 
             # recompute next_vector using the original vector
             # and the alpha adjusted gradient where p_k = -a*GRAD(x_k)
@@ -236,13 +220,14 @@ class GradientDescentOptimizer(Optimizer):
                next_vector[key] = (vector[key] - alpha_scaler*gradientValues[key])
 
             next_pcw.solution_vector = next_vector
-            next_pcw.constrain()
+            next_pcw.constrain() # may want to use lagrangian methods instead
             self.objective_function.evaluate(next_pcw)
             next_score = next_pcw.score
 
 
             print "\n" + str(alpha_scaler)
             print next_vector
+            print "Score: " + str(next_score)
             alpha_scaler = descent_scaler*alpha_scaler
 
             gradient_factor = completion_scaler*alpha_scaler*gradient_innerProduct
@@ -251,69 +236,74 @@ class GradientDescentOptimizer(Optimizer):
 
         if attempts > 4:
             print "\nDescent not achievable"
-            return default_pcw
+            return initial_pcw
+
+        if next_score < (descent_score + gradient_factor):
+            return next_pcw
 
         #TODO: revisions to below
         # if a vectors score already satisfies the wolfe conditions,
         # then we scale up the value of the gradient descent
         if attempts == 0:
+            last_score = initial_score
+            last_ascent_pcw = next_pcw.copy_phc
+
+            print "Descent is Relatively Steep!\n"
             # scale  the gradient at the values 10, 100, 1000, 10000
             # where 10000 * gradientValues[key] is the actual gradient value
             # in contrast to the reduced (scaled by 0.0001) gradient that is computed
             attempts = 1
-            ascent_scaler = 10
-            ascent_vector = next_pcw.solution_vector
+            ascent_scaler = 5
+            ascent_pcw = next_pcw.copy_phc
+            ascent_vector = ascent_pcw.solution_vector
 
             for key in vector.keys():
                 ascent_vector[key] = (vector[key] - (ascent_scaler)*gradientValues[key])
 
-            next_pcw.constrain()
-            self.objective_function.evaluate(next_pcw)
-            ascent_score = next_pcw.score
+            ascent_pcw.solution_vector = ascent_vector
+            ascent_pcw.constrain()
+            self.objective_function.evaluate(ascent_pcw)
+            ascent_score = ascent_pcw.score
             gradient_factor = completion_scaler*ascent_scaler*gradient_innerProduct
 
-            print "Maximizing Gradient"
-            print "\n" + str(ascent_scaler)
+            if ascent_pcw.score > last_score:
+                    return last_ascent_pcw
+            last_ascent_pcw = ascent_pcw.copy_phc
+
+            print "Scaling Ascent"
+            print "\nAscent Scaler: " + str(ascent_scaler)
             print ascent_vector
-            ascent_scaler = 10*ascent_scaler
+            print "Score: " + str(ascent_score)
+            ascent_scaler = 5*ascent_scaler
 
-            while ascent_score > (current_score + gradient_factor) and attempts < 5:
-                ascent_vector = next_vector.copy()
+            while ascent_score < (last_score + gradient_factor) and attempts < 5:
+                last_score = ascent_score
+                ascent_vector = ascent_pcw.solution_vector
                 for key in vector.keys():
+                    # assignment and boundary conditioning
                     ascent_vector[key] = min( [ 1, (next_vector[key] - (ascent_scaler)*gradientValues[key])])
-                next_pcw.solution_vector = ascent_vector
-                next_pcw.constrain()
-                self.objective_function.evaluate(next_pcw)
-                ascent_score = next_pcw.score
+                    # more on the fly boundary conditioning
+                    ascent_vector[key] = max( [-1, ascent_vector[key]])
 
-                print "Scaling Ascent"
+
+                ascent_pcw.solution_vector = ascent_vector
+                ascent_pcw.constrain()
+                self.objective_function.evaluate(ascent_pcw)
+
                 print "\n" + str(ascent_scaler)
                 print ascent_vector
-                ascent_scaler = 10*ascent_scaler
+                print "Score: " + str(ascent_score)
+                ascent_scaler = 5*ascent_scaler
                 attempts+= 1
 
                 gradient_factor = completion_scaler*ascent_scaler*gradient_innerProduct
 
-            if ascent_score < next_score:
-                return next_pcw
+                if ascent_pcw.score >= last_score:
+                    return last_ascent_pcw
 
+                last_ascent_pcw = ascent_pcw.copy_phc
+                ascent_score = ascent_pcw.score
 
-        return next_pcw
+            return last_ascent_pcw
 
-        # Below is an implementation of the Cauchy Point method
-        # for path choice of gradient descent
-
-        """
-        # gradient_L2norm = 0
-        # for key in gradient_Values.keys():
-        #     gradient_L2norm + = gradient_values[key]**2
-        # gradient_L2norm = math.sqrt(gradient_L2norm)
-        #
-        # descent_vector = {}
-
-        # for key in gradient_Values.keys():
-        #     descent_vector[key] = (-1)*delta*gradient_Values[key] / gradient_L2norm
-        #
-        """
-
-
+        return initial_pcw

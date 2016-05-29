@@ -67,11 +67,11 @@ solutions = [{'p2': 0.005009, 'p3': 0.006596, 'p1': -0.135418, 'r0': 0.237322, '
 population = []
 for vector in solutions:
     pcw = PhCWDesign(vector, 0, constraintFunctions)
-    population.append(pcw.copy_phc())
+    population.append(pcw.copy_phc)
 
-max_generation = 20 # number of iterations for SPEA
-population_size = 30 # number of solutions to consider in SPEA
-pareto_archive_size = 40 # number of solutions to store in the SPEA PAS
+max_generation = 50 # number of iterations for SPEA
+population_size = 50 # number of solutions to consider in SPEA
+pareto_archive_size = 60 # number of solutions to store in the SPEA PAS
 tournament_selection_rate  = 5 # number of solutions to consider for evolution in SPEA
 
 #Initialize objective function
@@ -82,11 +82,11 @@ key_map["bandwidth"] = "max"
 key_map["GBP"] = "max"
 
 pareto_function = ParetoMaxFunction(experiment, key_map)
-"""
+
 population2 = SpeaOptimizer.createPopulation(population_size - len(population),pcw)
 for p in population2:
     population.append(p)
-"""
+
 # SPEA section
 
 print "Starting SPEA"
@@ -94,10 +94,10 @@ print "Starting SPEA"
 
 optimizer = SpeaOptimizer(pareto_function)
 
-optimizer.optimize(population,max_generation,tournament_selection_rate, pareto_archive_size)
+results1 = optimizer.optimize(population,max_generation,tournament_selection_rate, pareto_archive_size)
 
 
-max_iterations = 5 # number of iterations of the DE alg
+max_iterations = 3 # number of iterations of the DE alg
 descent_scaler = 0.2
 completion_scaler = 0.1
 alpha_scaler = 0.9
@@ -129,12 +129,24 @@ print "Starting Gradient Descent Optimizer"
 
 optimizer2 = GradientDescentOptimizer(objFunc)
 
-results = optimizer2.optimize(population, descent_scaler, completion_scaler, alpha_scaler, max_iterations)
+results = optimizer2.optimize(results1, descent_scaler, completion_scaler, alpha_scaler, max_iterations)
 
 
+
+print "\nGradient Descent solutions generated"
+
+print "\nSPEA Results\n"
+
+for pcw in results1:
+    print pcw.solution_vector
+    print pcw.figures_of_merit
+
+
+print "\nSPEARS Results\n"
 
 for pcw in results:
     print pcw.solution_vector
     print pcw.figures_of_merit
 
-print "\nGradient Descent solutions generated"
+
+

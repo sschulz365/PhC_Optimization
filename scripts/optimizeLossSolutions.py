@@ -86,7 +86,7 @@ solutions = [{'r0': 0.273167, 'r1': 0.2, 'r2': 0.2, 'r3': 0.249118, 's3': 0.0336
 population = []
 for vector in solutions:
     pcw = PhCWDesign(vector, 0, constraintFunctions)
-    population.append(pcw.copy_phc())
+    population.append(pcw.copy_phc)
 
 max_generation = 15 # number of iterations for SPEA
 #population_size = 10 # number of solutions to consider in SPEA

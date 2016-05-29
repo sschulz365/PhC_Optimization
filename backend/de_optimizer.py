@@ -88,7 +88,7 @@ class DeOptimizer(Optimizer):
                     x3 = numpy.random.randint(1, elite_set_size)
 
                 # Select vector from population
-                u = population[j].copy_phc()
+                u = population[j].copy_phc
 
                 vector1 = population[x1].solution_vector
                 vector2 = population[x2].solution_vector
@@ -110,7 +110,7 @@ class DeOptimizer(Optimizer):
 
                 # determine whether to update the vector at j with the new vector u
                 if population_score[j] > u_score:
-                    population[j] = u.copy_phc()
+                    population[j] = u.copy_phc
                     population_score[j] = u_score
 
             #end for j
@@ -128,7 +128,7 @@ class DeOptimizer(Optimizer):
             # update elites with best new solutions from the population
             for k in range(0, population_size):
                 if population_score[k] <= max_score:
-                    elites[population_score[k]] = population[k].copy_phc()
+                    elites[population_score[k]] = population[k].copy_phc
                     top_scores.append(population_score[k])
 
             ## generate new elites
