@@ -50,11 +50,10 @@ class StochasticGradientDescentOptimizer(Optimizer):
 
 
                 result = self.partial_gradient_descent(check_pcw)
-                #vector = check_pcw.solution_vector
 
                 if result.score <= check_pcw.score:
-                    print "\nIiteration " + str(i) + " of " + str(max_iterations) + " results"
-                    print vector
+                    print "\nIteration " + str(i) + " of " + str(max_iterations) + " results"
+                    print result.solution_vector
                     print "\nScore: " + str(result.score)
                     print "Total Improvement: " + str(pcw.score - result.score)
                     print "Original FOM: " + original_fom
@@ -71,7 +70,7 @@ class StochasticGradientDescentOptimizer(Optimizer):
                 if bad_direction_count >= fault_tolerance:
                     i = max_iterations
                     print "Reached fault_limit"
-                    print vector
+                    print check_pcw.solution_vector
                     print "\nFinal Score: " + str(check_pcw.score)
                     print "Total Improvement: " + str(pcw.score - check_pcw.score)
                     print "Original FOM: " + original_fom
@@ -87,8 +86,8 @@ class StochasticGradientDescentOptimizer(Optimizer):
         return solutions
 
     def partial_gradient_descent(self, pcw):
-        descent_direction =  random.sample(pcw.solution_vector, 1)
-
+        descent_direction =  random.sample(pcw.solution_vector, 1)[0]
+        print "Descent Direction: " + str(descent_direction)
         delta = 0.0001
 
         pcw_with_vector_plus = pcw.copy_phc
@@ -106,11 +105,13 @@ class StochasticGradientDescentOptimizer(Optimizer):
         # Below is the first order partial derivative in key
         # computed by central finite difference scaled by delta
 
-        descent_magnitude = float("{0:.6f}".format((delta_plus_score - delta_minus_score) / 2))
 
+        descent_magnitude = float("{0:.6f}".format((delta_plus_score - delta_minus_score) / 2))
+        print "Descent Magnitude: " + str(descent_magnitude)
         # update next_pcw
         next_pcw = pcw.copy_phc
         next_pcw.solution_vector[descent_direction] -= descent_magnitude
+        next_pcw.contrain()
         self.objective_function.evaluate(next_pcw)
 
         return next_pcw

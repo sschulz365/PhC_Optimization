@@ -238,7 +238,6 @@ def extractFOM(experiment, lossMap, lossContrastMap, groupIndexMap, bandwidths, 
     maxBandwidthRatio = 0
     ng0_index = 0
     # loss_constraint = 0.7
-    print "\n"
     for j in range(2,experiment.kinterp): # experiment.kinterp is the number of kpoints
         #  if a given k point does not exist in the map
         #  then there was a parsing failure
