@@ -31,7 +31,6 @@ experiment.setBand(23)
 
 
 
-
 paramMap = {}
 paramMap["s1"] = 0 # First row vertical shift
 paramMap["s2"] = 0 # Second row vertical shift

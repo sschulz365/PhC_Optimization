@@ -7,7 +7,7 @@ from backend.experiment import W1Experiment
 from backend.objectiveFunctions import WeightedSumObjectiveFunction, IdealDifferentialObjectiveFunction
 import math
 from backend.de_optimizer import DeOptimizer
-from backend.gd_optimizer import GradientDescentOptimizer
+from backend.sgd_optimizer import StochasticGradientDescentOptimizer
 from backend.photonicCrystalDesign import PhCWDesign
 
 paramMap = {}
@@ -21,6 +21,7 @@ paramMap["r0"] = 0.3 # Default air-hole radius
 paramMap["r1"] = 0.3 # Default first row radius
 paramMap["r2"] = 0.3 # Default second row radius
 paramMap["r3"] = 0.3 # Default third row radius
+
 
 # absolute path to the mpb executable
 mpb = "/Users/sean/documents/mpb-1.5/mpb/mpb"
@@ -48,10 +49,8 @@ constraintFunctions = [backend.constraints.latticeConstraintsLD]
 pcw = PhCWDesign(paramMap, 0, constraintFunctions)
 
 population_size = 5
-max_iterations = 5 # number of iterations of the DE alg
-descent_scaler = 0.8
-completion_scaler = 0.1
-alpha_scaler = 0.9
+max_iterations = 10 # number of iterations of the DE alg
+fault_tolerance = 3
 band = 23 # band of interest for MPB computations
 
 
@@ -75,7 +74,7 @@ objFunc = WeightedSumObjectiveFunction(weights, experiment)
 
 # Gradient Descent section
 
-print "Starting Gradient Descent Optimizer"
+print "Starting Stochastic Gradient Descent Optimizer"
 
 
 
@@ -90,19 +89,19 @@ vectors = [{'p2': 0.014115, 'p3': 0.045876, 'p1': 0.045209, 'r0': 0.244875, 'r1'
 
 
 
-population = GradientDescentOptimizer.createPopulation(len(vectors), pcw)
+population = StochasticGradientDescentOptimizer.createPopulation(len(vectors), pcw)
 i = 0
 for pc in population:
     pc.solution_vector = vectors[i]
     i += 1
 
-optimizer = GradientDescentOptimizer(objFunc)
+optimizer = StochasticGradientDescentOptimizer(objFunc)
 
-results = optimizer.optimize(population, descent_scaler, completion_scaler, alpha_scaler, max_iterations)
+results = optimizer.optimize(population, max_iterations, fault_tolerance)
 
 
 
-print "\nGradient Descent solutions generated"
+print "\nStochastic Gradient Descent solutions generated"
 
 i = 0
 for opt_pcw in results:

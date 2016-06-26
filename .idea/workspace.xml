@@ -2,19 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22801302-2bd7-43d9-8caa-0b119e33ebf4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HowToBuildPCWOScrypts.ipynb" afterPath="$PROJECT_DIR$/HowToBuildPCWOScrypts.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/de_optimizer.py" afterPath="$PROJECT_DIR$/backend/de_optimizer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/gd_optimizer.py" afterPath="$PROJECT_DIR$/backend/gd_optimizer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/mpbParser.py" afterPath="$PROJECT_DIR$/backend/mpbParser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/objectiveFunctions.py" afterPath="$PROJECT_DIR$/backend/objectiveFunctions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/optimizeDelaySolutions.py" afterPath="$PROJECT_DIR$/scripts/optimizeDelaySolutions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/optimizeGBPsolutions.py" afterPath="$PROJECT_DIR$/scripts/optimizeGBPsolutions.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/test_sgd_optimizer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/W1_2D_v04.ctl.txt-epsilon.h5" afterPath="$PROJECT_DIR$/scripts/W1_2D_v04.ctl.txt-epsilon.h5" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/optimizeLossSolutions.py" afterPath="$PROJECT_DIR$/scripts/optimizeLossSolutions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/optimizer.py" afterPath="$PROJECT_DIR$/backend/optimizer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/paretoFunctions.py" afterPath="$PROJECT_DIR$/backend/paretoFunctions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/photonicCrystalDesign.py" afterPath="$PROJECT_DIR$/backend/photonicCrystalDesign.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/spea_optimizer.py" afterPath="$PROJECT_DIR$/backend/spea_optimizer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/runOptimizer.py" afterPath="$PROJECT_DIR$/scripts/runOptimizer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/sgd_optimizer.py" afterPath="$PROJECT_DIR$/backend/sgd_optimizer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/test_de_optimizer.py" afterPath="$PROJECT_DIR$/scripts/test_de_optimizer.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/test_gd_optimizer.py" afterPath="$PROJECT_DIR$/scripts/test_gd_optimizer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/test_spea_optimizer.py" afterPath="$PROJECT_DIR$/scripts/test_spea_optimizer.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PCWO.iws" />
@@ -36,38 +31,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="spea_optimizer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/spea_optimizer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="235" column="29" selection-start-line="235" selection-start-column="29" selection-end-line="235" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mpbParser.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/mpbParser.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="132" column="1" selection-start-line="132" selection-start-column="1" selection-end-line="132" selection-end-column="1" />
-              <folding>
-                <element signature="e#22#33#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="constraints.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/constraints.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="70" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="70" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="optimizeGBPsolutions.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/optimizeGBPsolutions.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -78,11 +41,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_gd_optimizer.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/test_gd_optimizer.py">
+      <file leaf-file-name="optimizeLossSolutions.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/optimizeLossSolutions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49395162">
-              <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pcw_storage.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/pcw_storage.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_sgd_optimizer.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/test_sgd_optimizer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="3.3181818">
+              <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
               <folding>
                 <element signature="e#21#34#0" expanded="true" />
               </folding>
@@ -90,36 +73,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="paretoFunctions.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/paretoFunctions.py">
+      <file leaf-file-name="plotVelocities.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/plotVelocities.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
-              <folding>
-                <element signature="e#23#93#0" expanded="true" />
-                <element signature="e#2583#2728#0" expanded="false" />
-                <element signature="e#3023#3307#0" expanded="false" />
-                <element signature="e#4503#4788#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="photonicCrystalDesign.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/photonicCrystalDesign.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="64" selection-start-line="26" selection-start-column="64" selection-end-line="26" selection-end-column="64" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="experiment.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/experiment.py">
+      <file leaf-file-name="runOptimizer.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/runOptimizer.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
+              <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pcw_storage.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pcw_storage.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -129,7 +107,7 @@
         <entry file="file://$PROJECT_DIR$/backend/sgd_optimizer.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="57" column="48" selection-start-line="57" selection-start-column="48" selection-end-line="57" selection-end-column="48" />
+              <caret line="70" column="57" selection-start-line="70" selection-start-column="57" selection-end-line="70" selection-end-column="57" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -137,14 +115,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gd_optimizer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/gd_optimizer.py">
+      <file leaf-file-name="generateFieldProfiles.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/generateFieldProfiles.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.0740743">
-              <caret line="255" column="0" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
-              <folding>
-                <element signature="e#22#35#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="optimizeDelaySolutions.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/optimizeDelaySolutions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -171,18 +157,22 @@
         <option value="$PROJECT_DIR$/deprecatedScripts/testSPEA.py" />
         <option value="$PROJECT_DIR$/backend/experiment.py" />
         <option value="$PROJECT_DIR$/scripts/evaluate_PCW.py" />
-        <option value="$PROJECT_DIR$/scripts/test_spea_optimizer.py" />
         <option value="$PROJECT_DIR$/scripts/HowToBuildPCWOScrypts.ipynb" />
         <option value="$PROJECT_DIR$/HowToBuildPCWOScrypts.ipynb" />
         <option value="$PROJECT_DIR$/backend/mpbParser.py" />
         <option value="$PROJECT_DIR$/backend/paretoFunctions.py" />
         <option value="$PROJECT_DIR$/backend/objectiveFunctions.py" />
         <option value="$PROJECT_DIR$/scripts/optimizeGBPsolutions.py" />
-        <option value="$PROJECT_DIR$/backend/sgd_optimizer.py" />
         <option value="$PROJECT_DIR$/backend/spea_optimizer.py" />
         <option value="$PROJECT_DIR$/backend/gd_optimizer.py" />
         <option value="$PROJECT_DIR$/backend/photonicCrystalDesign.py" />
         <option value="$PROJECT_DIR$/scripts/test_gd_optimizer.py" />
+        <option value="$PROJECT_DIR$/scripts/test_de_optimizer.py" />
+        <option value="$PROJECT_DIR$/scripts/test_spea_optimizer.py" />
+        <option value="$PROJECT_DIR$/scripts/optimizeLossSolutions.py" />
+        <option value="$PROJECT_DIR$/scripts/runOptimizer.py" />
+        <option value="$PROJECT_DIR$/backend/sgd_optimizer.py" />
+        <option value="$PROJECT_DIR$/scripts/test_sgd_optimizer.py" />
       </list>
     </option>
   </component>
@@ -217,7 +207,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -266,6 +255,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -280,7 +270,7 @@
       <recent name="$PROJECT_DIR$/deprecatedScripts" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test_gd_optimizer">
+  <component name="RunManager" selected="Python.test_sgd_optimizer">
     <configuration default="false" name="parseParametersFromFile" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -345,6 +335,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="PCWO" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/test_gd_optimizer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="test_sgd_optimizer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="PCWO" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/test_sgd_optimizer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -471,18 +478,20 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.parseParametersFromFile" />
       <item index="1" class="java.lang.String" itemvalue="Python.visualize_gv_plots" />
       <item index="2" class="java.lang.String" itemvalue="Python.optimizeGBPsolutions" />
       <item index="3" class="java.lang.String" itemvalue="Python.test_gd_optimizer" />
+      <item index="4" class="java.lang.String" itemvalue="Python.test_sgd_optimizer" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.test_gd_optimizer" />
-        <item index="1" class="java.lang.String" itemvalue="Python.optimizeGBPsolutions" />
-        <item index="2" class="java.lang.String" itemvalue="Python.visualize_gv_plots" />
-        <item index="3" class="java.lang.String" itemvalue="Python.parseParametersFromFile" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.test_sgd_optimizer" />
+        <item index="1" class="java.lang.String" itemvalue="Python.test_gd_optimizer" />
+        <item index="2" class="java.lang.String" itemvalue="Python.optimizeGBPsolutions" />
+        <item index="3" class="java.lang.String" itemvalue="Python.visualize_gv_plots" />
+        <item index="4" class="java.lang.String" itemvalue="Python.parseParametersFromFile" />
       </list>
     </recent_temporary>
   </component>
@@ -510,19 +519,19 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32950193" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32950193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32950193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3290653" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290653" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32950193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40076825" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40076825" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -577,65 +586,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/optimizeGBPsolutions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/test_gd_optimizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding>
-            <element signature="e#21#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/objectiveFunctions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="128" column="43" selection-start-line="128" selection-start-column="43" selection-end-line="128" selection-end-column="43" />
-          <folding>
-            <element signature="e#42#112#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/paretoFunctions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
-          <folding>
-            <element signature="e#23#93#0" expanded="true" />
-            <element signature="e#2583#2728#0" expanded="false" />
-            <element signature="e#3023#3307#0" expanded="false" />
-            <element signature="e#4503#4788#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/photonicCrystalDesign.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="33" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/sgd_optimizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/gd_optimizer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -685,7 +635,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding>
-            <element signature="e#21#34#0" expanded="true" />
+            <element signature="e#21#34#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -695,7 +645,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="128" column="43" selection-start-line="128" selection-start-column="43" selection-end-line="128" selection-end-column="43" />
           <folding>
-            <element signature="e#42#112#0" expanded="true" />
+            <element signature="e#42#112#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -705,7 +655,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="126" column="35" selection-start-line="126" selection-start-column="35" selection-end-line="126" selection-end-column="35" />
           <folding>
-            <element signature="e#23#93#0" expanded="true" />
+            <element signature="e#23#93#0" expanded="false" />
             <element signature="e#2583#2728#0" expanded="false" />
             <element signature="e#3023#3307#0" expanded="false" />
             <element signature="e#4503#4788#0" expanded="false" />
@@ -783,13 +733,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/plotVelocities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/deprecatedScripts/testConstraints.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -805,13 +748,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/deprecatedScripts/runExperimentTesting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/runOptimizer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -846,13 +782,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/evaluate_PCW.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/de_optimizer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.962963">
@@ -875,49 +804,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/test_spea_optimizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HowToBuildPCWOScrypts.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/optimizeLossSolutions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/test_de_optimizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="6" selection-start-line="72" selection-start-column="6" selection-end-line="72" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/objectiveFunctions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="128" column="43" selection-start-line="128" selection-start-column="43" selection-end-line="128" selection-end-column="43" />
           <folding>
-            <element signature="e#42#112#0" expanded="true" />
+            <element signature="e#42#112#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/optimizeGBPsolutions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -934,7 +827,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
           <folding>
-            <element signature="e#23#93#0" expanded="true" />
+            <element signature="e#23#93#0" expanded="false" />
             <element signature="e#2583#2728#0" expanded="false" />
             <element signature="e#3023#3307#0" expanded="false" />
             <element signature="e#4503#4788#0" expanded="false" />
@@ -960,31 +853,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/sgd_optimizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="48" selection-start-line="57" selection-start-column="48" selection-end-line="57" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/experiment.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/gd_optimizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.0740743">
-          <caret line="255" column="0" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
-          <folding>
-            <element signature="e#22#35#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -996,10 +869,143 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/HowToBuildPCWOScrypts.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/gd_optimizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="171" column="64" selection-start-line="130" selection-start-column="12" selection-end-line="171" selection-end-column="64" />
+          <folding>
+            <element signature="e#22#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/test_gd_optimizer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49395162">
-          <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding>
+            <element signature="e#21#34#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/test_de_optimizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="90" column="17" selection-start-line="90" selection-start-column="17" selection-end-line="90" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/test_spea_optimizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/evaluate_PCW.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/generate_latex_table.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/generateFieldProfiles.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/optimizeDelaySolutions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/optimizeGBPsolutions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/optimizeLossSolutions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/plotVelocities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/runOptimizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pcw_storage.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/pcw_storage.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/sgd_optimizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="70" column="57" selection-start-line="70" selection-start-column="57" selection-end-line="70" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/test_sgd_optimizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.3181818">
+          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
           <folding>
             <element signature="e#21#34#0" expanded="true" />
           </folding>
