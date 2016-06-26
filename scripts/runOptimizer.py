@@ -21,17 +21,6 @@ paramMap["r1"] = 0.3 # Default first row radius
 paramMap["r2"] = 0.3 # Default second row radius
 paramMap["r3"] = 0.3 # Default third row radius
 
-# subprocess call attempts to hide the following warning
-# that will be ouput in the command prompt
-# for some python Development environments
-#
-# Some deprecated features have been used.  Set the environment
-# variable GUILE_WARN_DEPRECATED to "detailed" and rerun the
-# program to get more information.  Set it to "no" to suppress
-# this message.
-
-#subprocess.call("export GUILE_WARN_DEPRECATED=no", shell = True)
-
 # absolute path to the mpb executable
 mpb = "/Users/sean/documents/mpb-1.5/mpb/mpb"
 
@@ -51,20 +40,6 @@ experiment.setCalculationType('4') # accepts an int from 0 to 5
 experiment.setBand(23)
 
 
-# descriptions for these constraitns are available in the constraints.py file
-#constraintFunctions = [ constraints.constraintAP1, constraints.constraint0P1,
-#                constraints.constraintAP2, constraints.constraint0P2,
-#                constraints.constraintAP3, constraints.constraint0P3,
-#                constraints.constraintAS1, constraints.constraint0S1,
-#                constraints.constraintAS2, constraints.constraint0S2,
-#                constraints.constraintAR1, constraints.constraintAR2,
-#                constraints.constraintAR3]
-"""
-constraintFunctions = [ constraints.constraintAR1, constraints.constraintAR2,
-                        constraints.constraintAR3, constraints.constraintAR0,
-                        constraints.constraint0R1, constraints.constraint0R2,
-                        constraints.constraint0R3, constraints.constraint0R0]
-"""
 # see constraints.py
 constraintFunctions = [constraints.latticeConstraintsLD]
 
@@ -83,16 +58,6 @@ w4 = 0 # BGP weight
 w5 = 30 #0.002 # loss at ngo (group index) weight
 w6 = 0
 
-"""
-# specify the weights for the WeightedSumObjectiveFunction
-
-w1 = 0 # bandwidth weight
-w2 = 50 # group index weight
-w3 = 0 # average loss weight
-w4 = 0 #0.6 # BGP weight
-w5 = 0.02 # loss at ngo (group index) weight
-w6 = 1 # delay weight
-"""
 # these wights are use in the Objective Function to score mpb results
 weights = [ w1, w2, w3, w4, w5, w6]
 
@@ -131,29 +96,7 @@ completion_scaler = 0.1
 alpha_scaler = 0.9
 
 
-# perform gradient descent on the top 3 solutions
 
-#top_scores = DEsolutions.keys().sort()
-
-# code to consider a subset of the top solutions from DE alg
-# this code would consider the top n solutions
-#
-#print "Creating Initial Population...\n"
-# n_to_consider = 5
-#Rsolutions = {} # a dictonary for storing scored solutions from DE { (score: solution) , ...}
-#top_solutions = {}
-#for vector in population:
-#    v_score = weightedSumObjectiveFunction(weights, vector, experiment)[0]
-#    Rsolutions[v_score] = vector.copy()
-
-#top_scores = []
-#top_scores = sorted(Rsolutions.keys())
-    
-#for score in top_scores:
-#    if len(top_solutions.keys()) < n_to_consider:
-#        top_solutions[score] = Rsolutions[score].copy()
-
-#population = top_solutions    
 # Gradient Descent Section
 
 print "\nStarting Gradient Descent Optimizer"
