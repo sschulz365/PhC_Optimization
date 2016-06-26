@@ -13,7 +13,7 @@ from photonicCrystalDesign import PhCWDesign
 # according to a set of stopping conditions
 # and returns the optimized vectors as a set of pcw solutions
 
-class StochasticGradientDescentOptimizer(Optimizer):
+class MonteCarloOptimizer(Optimizer):
     __metaclass__ = ABCMeta
 
 
@@ -22,12 +22,12 @@ class StochasticGradientDescentOptimizer(Optimizer):
         self.objective_function = objective_function
         self.solutions = []
 
-    def optimize(self, population, max_iterations, fault_tolerance):
-        solutions = self.stochastic_gradient_descent(population, max_iterations, fault_tolerance)
+    def optimize(self, population, max_iterations, fault_tolerance, step_size):
+        solutions = self.monte_carlo(population, max_iterations, fault_tolerance, step_size)
 
         return solutions
 
-    def stochastic_gradient_descent(self, population, max_iterations, fault_tolerance):
+    def monte_carlo(self, population, max_iterations, fault_tolerance, step_size):
         solutions = []
         j = 1
         # optimize vectors with gradient descent
@@ -45,12 +45,13 @@ class StochasticGradientDescentOptimizer(Optimizer):
             bad_direction_count = 0
             while i <= max_iterations:
                 print "\n\nIteration: " + str(i)
-                # Stochastic Gradient Descent randomly improves 'vector' until max_iterations is met
+                # the Stochastic Gradient Descent randomly improves 'vector' until max_iterations is met
+                # (see above for method specifications)
 
 
                 result = self.partial_gradient_descent(check_pcw)
 
-                if result.score <= check_pcw.score:
+                if result.score < check_pcw.score:
                     print "\nIteration " + str(i) + " of " + str(max_iterations) + " results"
                     print result.solution_vector
                     print "\nScore: " + str(result.score)
@@ -58,11 +59,10 @@ class StochasticGradientDescentOptimizer(Optimizer):
                     print "Original FOM: " + original_fom
                     print "New FOM: " + str(result.figures_of_merit)
                     check_pcw = result
-
-                if result.score >= check_pcw.score:
-                    bad_direction_count += 1
-                else:
                     bad_direction_count = 0
+                else:
+                    bad_direction_count += 1
+
 
 
                 if bad_direction_count >= fault_tolerance:
@@ -83,45 +83,18 @@ class StochasticGradientDescentOptimizer(Optimizer):
         # end for vector
         return solutions
 
-    def partial_gradient_descent(self, pcw):
-        descent_direction =  random.sample(pcw.solution_vector, 1)[0]
-        print "Descent Direction: " + str(descent_direction)
-        delta = 0.001
-
-        pcw_with_vector_plus = pcw.copy_phc
-        pcw_with_vector_minus = pcw.copy_phc
-
-        pcw_with_vector_plus.solution_vector[descent_direction] = pcw_with_vector_plus.solution_vector[descent_direction] + delta
-        pcw_with_vector_minus.solution_vector[descent_direction] = pcw_with_vector_plus.solution_vector[descent_direction] - delta
-
-        self.objective_function.evaluate(pcw_with_vector_plus)
-        self.objective_function.evaluate(pcw_with_vector_minus)
-
-        delta_plus_score = pcw_with_vector_plus.score
-        delta_minus_score = pcw_with_vector_minus.score
-
-        # Below is the first order partial derivative in key
-        # computed by central finite difference scaled by delta
-
-
-        descent_magnitude = float("{0:.6f}".format((delta_plus_score - delta_minus_score) / 2))
-        print "Descent Magnitude: " + str(descent_magnitude)
-        if descent_magnitude == 0.0:
-            return pcw
+    def explore_path(self, pcw, step_size):
+        descent_direction = random.sample(pcw.solution_vector, 1)[0]
+        print "Step Direction: " + str(descent_direction)
+        if random.Random() > 0.5:
+             descent_magnitude = 1
+        else:
+            descent_magnitude = -1
+        print "Step Magnitude: " + str(descent_magnitude*step_size)
         # update next_pcw
         next_pcw = pcw.copy_phc
-        next_pcw.solution_vector[descent_direction] -= descent_magnitude
+        next_pcw.solution_vector[descent_direction] -= descent_magnitude*step_size
         next_pcw.constrain()
         self.objective_function.evaluate(next_pcw)
-
-        #Attempt brief scaling
-        if next_pcw.score >= pcw.score:
-            print "Backtracking"
-            scaled_descent_magnitude = float("{0:.6f}".format(descent_magnitude/ next_pcw.score))
-            print "Scaled Descent Magnitude: " + str(scaled_descent_magnitude)
-            next_pcw = pcw.copy_phc
-            next_pcw.solution_vector[descent_direction] -= scaled_descent_magnitude
-            next_pcw.constrain()
-            self.objective_function.evaluate(next_pcw)
 
         return next_pcw

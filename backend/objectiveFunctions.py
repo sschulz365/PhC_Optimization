@@ -12,9 +12,6 @@ class ObjectiveFunction:
 
     # constructor parameters
     def __init_(self, experiment, objectives):
-        """
-
-        """
         self.experiment = experiment
         self.objectives = objectives
 
@@ -210,9 +207,8 @@ class WeightedSumObjectiveFunction3D(ObjectiveFunction):
             pcw.score = float("{0:.4f}".format(math.sqrt((w1/bandwidth)**2 + (w2/ng0)**2 + (w3*avgLoss)**2 + ((w5*loss_at_ng0)**2) + (w4/gbp)**2 + (w6/delay)**2)))
 
 
-            #return [ score, bandwidth, ng0, avgLoss, bgp, loss_at_ng0, delay]
 
-
+#TODO: update with pcw class formalism
 class IdealDifferentialObjectiveFunction(ObjectiveFunction):
 
     def __init__(self, weights, experiment, ideal_solution):
@@ -281,10 +277,6 @@ class IdealDifferentialObjectiveFunction(ObjectiveFunction):
         loss_difference = (loss_at_ng0 - ideal_loss_at_group_index) /ideal_loss_at_group_index # inverted because we want to minimize loss
         bgp_difference = (ideal_bgp - bgp)/ ideal_bgp
         delay_difference =(ideal_delay - delay)/delay
-        #print bandwidth_difference
-        #print ng0_difference
-        #print loss_difference
-        #print bgp_difference
         score = float("{0:.7f}".format(w1*bandwidth_difference + w2*ng0_difference + w4*bgp_difference + w5*loss_difference + w6*delay_difference))
         
         # note score can be negative if the ideal is surpassed

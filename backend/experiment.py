@@ -10,14 +10,14 @@ import mpbParser
 # should be refactored as W1Experiment
 # and no parameter adjustments
 class W1Experiment(object):
+
         # initializes the W1Experiment with default parameters (acts as a constructor specification)
         def __init__(self, mpb, inputFile, outputFile):
             """
 
-            :param mpb:
-            :param inputFile:
-            :param outputFile:
-            :return:
+            :param mpb: command line path for the mpb program
+            :param inputFile: specifies the structure of the waveguide
+            :param outputFile: records output such as tefreqs, loss
             """
             self.inputFile = inputFile
             self.mpb = mpb
@@ -36,10 +36,8 @@ class W1Experiment(object):
 
         # execute the current instantiation of W1Experiment as a mpb calculation via the command line
         def perform(self):
-                # + "-split 4"
 
             FNULL = open(os.devnull, 'w')
-            # print self.mpb + self.calculationType + self.paramVectorString + ' %s > %s' %(self.inputFile, self.outputFile)
             subprocess.call(self.mpb + self.split + " Ks="+ str(self.ks) + " Ke=" + str(self.ke) + " Kinterp=" + str(self.kinterp) + self.calculationType + self.paramVectorString + ' %s > %s' %(self.inputFile, self.outputFile),
                             shell=True, stdout=FNULL, stderr=subprocess.STDOUT)
 
@@ -75,6 +73,9 @@ class W1Experiment(object):
         # determine which band we are considering for a given photonic crystal
         def setBand(self, newBand):
             self.band = newBand
+
+        def setSplit(self, split_num):
+            self.split = "-split " + str(split_num)
 
         def noSplit(self):
             self.split = ""

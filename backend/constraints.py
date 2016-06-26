@@ -24,7 +24,7 @@ def constraintAP1(parameterMap):
         p1 = -parameterMap["p1"]
         if p1 >= 0.5:
             parameterMap["p1"] = -0.5
-    
+
 def constraint0P1(parameterMap):
     if "p1" in parameterMap.keys():
         p1 = -parameterMap["p1"]
@@ -91,9 +91,6 @@ def constraint0S3(parameterMap):
         if s3 < -0.5:
             parameterMap["s3"] = 0.5
 
-## end of DEPRECATED
-
-
 def constraintAR1(parameterMap):
     if 2*parameterMap["r1"] >= 0.8:
         parameterMap["r1"] = 0.4
@@ -127,7 +124,6 @@ def constraint0R0(parameterMap):
     if parameterMap["r0"] < 0.2:
         parameterMap["r0"] = 0.2
 
-# format corrected SR constraints
 
 # contrains the overlap between the 4th and 3rd row
 def constraintsPSR03(parameterMap):
@@ -194,8 +190,7 @@ def constraintsPSR32(parameterMap):
         r2 = 0
 
     hole_distance_3_2 = math.sqrt( ((1/math.sqrt(2)) + s3 - s2)**2 + ((1/math.sqrt(2)) - math.fabs(p3 - p2))**2)
-    #print hole_distance_3_2
-    #print (parameterMap['r2'] + parameterMap['r3'] )
+
     if hole_distance_3_2 - 0.1 < (r3 + r2 ): # if holes overlap
          # randomly rescale hole radius or shift (unless hole radius is too small)
         if r2 > 0.23:
@@ -221,6 +216,7 @@ def constraintsPSR32(parameterMap):
             parameterMap['r2'] = 0.9*parameterMap['r2']
             constraintsPSR32(parameterMap)
 
+# contrains the overlap between the 2nd and 1st row
 def constraintsPSR21(parameterMap):
     if "s2" in parameterMap.keys():
         s2 = -parameterMap["s2"]
@@ -248,8 +244,7 @@ def constraintsPSR21(parameterMap):
         r1 = 0
 
     hole_distance_3_2 = math.sqrt( ((1/math.sqrt(2)) + s2 - s1)**2 + ((1/math.sqrt(2)) - math.fabs(p2 - p1))**2)
-    #print hole_distance_3_2
-    #print (parameterMap['r2'] + parameterMap['r3'] )
+
     if hole_distance_3_2 - 0.1 < (r2 + r1 ): # if holes overlap
          # randomly rescale hole radius or shift (unless hole radius is too small)
         if r1 > 0.23:
@@ -309,9 +304,6 @@ def latticeConstraintsLD(parameterMap):
     constraint0S2(parameterMap)
     constraint0S3(parameterMap)
 
-
-    # I'm trying very hard here
-    # not to violate the lattice constraints by rounding
     constraintRounding(parameterMap)
     constraintsPSR03(parameterMap)
     constraintsPSR32(parameterMap)

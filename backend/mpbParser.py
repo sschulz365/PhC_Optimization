@@ -120,9 +120,6 @@ def parseObjFunctionParams(experiment): # input is an experiment
 
     #end for (actual parsing)
 
-    #print "DEBUG: Loss Map: " + str(lossMap)
-    #print "DEBUG: Group Index Map: " + str(groupIndexMap)
-
     return extractFOM(experiment,lossMap, lossContrastMap, groupIndexMap,bandwidths,"MAXGBP")
 
 
@@ -130,7 +127,6 @@ def parseObjFunctionParams(experiment): # input is an experiment
 # The following parser has been defined for the line defect waveguide
 # as specified in output format used for the W1_3D_v1.ctl mpb control file
 # this method parses, Loss, bandwidth, and Group Index and associated output values like loss at ng0 and BGP
-#TODO: merge with parseObjFunctionParams
 def parseObjFunctionParams3D(experiment): # input is an experiment
     outF = open(experiment.outputFile)
     groupIndex = 0
@@ -156,7 +152,6 @@ def parseObjFunctionParams3D(experiment): # input is an experiment
 
     #iterates over the file in reverse order (the order affects the feature extraction entirely)
     for line in reversed(outF.readlines()):
-        # regex may need to be fixed
 
         #1 search for bandwidths and assign at index accoring to the band
         if "zevenfreqs:, " in line and "k index" not in line:
@@ -203,7 +198,6 @@ def parseObjFunctionParams3D(experiment): # input is an experiment
         # this line will occur after the above,
         # at this point loss can be computed (as in Dr. Schulz Paper)
         if ("solve_kpoint" in line):
-            # print line
 
             if (not gammaValues == {}) and (not rhoValues == {}) and band != -1:
                 # no field fraction for 3d simulations
@@ -216,10 +210,6 @@ def parseObjFunctionParams3D(experiment): # input is an experiment
                 gammaValues = {}
                 rhoValues = {}
                 #the loss formula is from "Beyond the effective index method: ..." by Dr. Schulz et al
-            
-        
-            
-
         
     #end for (actual parsing)
 
@@ -422,6 +412,7 @@ def extractFOM(experiment, lossMap, lossContrastMap, groupIndexMap, bandwidths, 
 
         ng0_index = min_loss_index
         """
+
         ng0 = groupIndexMap[ng0_index]
 
 
@@ -431,8 +422,6 @@ def extractFOM(experiment, lossMap, lossContrastMap, groupIndexMap, bandwidths, 
             if (((groupIndexMap[i] < 1.1*ng0) and (groupIndexMap[i] > 0.9*ng0)) or ((groupIndexMap[i] > 1.1*ng0) and (groupIndexMap[i] < 0.9*ng0))) and lossContrastMap[i] < 0.1*lossMap[i]:
                 potentialBandwidthIndexes.append(i)
 
-        # print "\nPotential bandwidths"
-        # print potentialBandwidthIndexes # sanity check
         # evaluate potentialBandwidthIndexes as a 'continuous' set of values
         bandwidthMinIndex = min(potentialBandwidthIndexes)
         bandwidthMaxIndex = max(potentialBandwidthIndexes)
@@ -454,11 +443,8 @@ def extractFOM(experiment, lossMap, lossContrastMap, groupIndexMap, bandwidths, 
                 if k not in potentialBandwidthIndexes:
                     startRemoving = True
 
-        #print "DEBUG: Central Band Region: " + str(potentialBandwidthIndexes) # sanity check
-        # prepare to compute average loss and bandwidth
+         # prepare to compute average loss and bandwidth
 
-        #print "DEBUG: ngo index: " + str(ng0_index)
-        #print "\n" + "ngo: " + str(ng0)
          # calculate loss at group index
         loss_at_ng0 = lossMap[ng0_index]
 
@@ -477,23 +463,19 @@ def extractFOM(experiment, lossMap, lossContrastMap, groupIndexMap, bandwidths, 
             viableGroupIndexes[p] = math.fabs(groupIndexMap[p])
             viableLosses[p] = lossMap[p]
 
-        # print viableBandwidths # sanity check
         # bandwidthNormalized is essentially dw/w0 for ng_i > 0.9*ng0, ng_i < 1.1*ng0
         bandwidthNormalized = ( max(viableBandwidths.values())
                                 - min(viableBandwidths.values()) ) / viableBandwidths[ng0_index]
 
 
-        # compute the average group index (this may not be a useful measure)
+        # compute the average group index (this may not be as useful a measure as it seams)
         avgGroupIndex = sum(viableGroupIndexes.values()) / float(len(viableGroupIndexes.values()))
-        # avgGroupIndex = sum(groupIndexMap.values()) / float(len(groupIndexMap.values()))
-        # print lossMap
+
 
         avgLoss = sum(viableLosses.values()) / float(len(viableLosses.values()))
-        # avgLoss = sum(lossMap.values()) / float(len(lossMap.values()))
 
         # compute BGP
         bandWidthRatio = avgGroupIndex*bandwidthNormalized # could use ng0
-        # bandwidthRatio = ng0*bandwidthNormalized
 
         length = 120
 
@@ -527,35 +509,20 @@ def extractFOM(experiment, lossMap, lossContrastMap, groupIndexMap, bandwidths, 
             group_velocity_dispersion = 100000
         # end of GVD computation
 
-        #print "[Debug] GVD: " + str(group_velocity_dispersion) # placeholder until GVD integration
-
-        #
         maximum_acceptable_loss = 10
         length_loss_limited = float(maximum_acceptable_loss) / loss_at_ng0 # in dB/ dB/ cm
         delay_loss_limited = (math.fabs(ng0)-5) * length_loss_limited / c * 1000 # in ps
-
-        #print "[Debug] Loss Delay: " + str(delay_loss_limited)
 
         # delay formula is derived in respect to "Dispersion engineered slow light in photonic crystals: a comparison" by Sebastian Schulz et al
         initial_pulse_width = 0.045 # t_0 (in ns)
         length_gvd_limited = initial_pulse_width**2 / (4 * math.log(2) * group_velocity_dispersion) # in units of ns^2/ ns^2/cm
         delay_gvd_limited = (math.fabs(ng0)-5) * math.fabs(length_gvd_limited) / c * 1000 # in ps
 
-        #print "[Debug] GVD Delay: " + str(delay_gvd_limited) + "\n"
 
         if delay_gvd_limited < delay_loss_limited:
             delay = delay_gvd_limited
-            #print "DEBUG: GVD limited structure"
-            #print "DEBUG: Length: " + str(length_gvd_limited * 10) + " mm"
         else:
             delay = delay_loss_limited
-            #print "DEBUG: Loss limited structure"
-            #print "DEBUG: Length: " + str(length_loss_limited * 10) + " mm"
-
-
-        #delay = min(delay_loss_limited, delay_gvd_limited)
-
-        #ngo = avgGroupIndex
 
         output_map ={}
 
