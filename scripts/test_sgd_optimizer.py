@@ -51,7 +51,6 @@ pcw = PhCWDesign(paramMap, 0, constraintFunctions)
 population_size = 5
 max_iterations = 10 # number of iterations of the DE alg
 fault_tolerance = 3
-band = 23 # band of interest for MPB computations
 
 
 # specify the weights for the WeightedSumObjectiveFunction
@@ -76,9 +75,6 @@ objFunc = WeightedSumObjectiveFunction(weights, experiment)
 
 print "Starting Stochastic Gradient Descent Optimizer"
 
-
-
-
 vectors = [{'p2': 0.014115, 'p3': 0.045876, 'p1': 0.045209, 'r0': 0.244875, 'r1': 0.2, 'r2': 0.383745, 'r3': 0.2, 's3': -0.059986, 's2': -0.094858, 's1': -0.062471},
 {'p2': -0.183314, 'p3': 0.041983, 'p1': -0.159294, 'r0': 0.2, 'r1': 0.25053, 'r2': 0.341765, 'r3': 0.2, 's3': 0.080771, 's2': -0.101123, 's1': -0.126011},
 {'p2': 0.115662, 'p3': 0.024481, 'p1': -0.134189, 'r0': 0.246696, 'r1': 0.237683, 'r2': 0.4, 'r3': 0.2, 's3': 0.094071, 's2': -0.100857, 's1': 0.088909},
@@ -86,7 +82,6 @@ vectors = [{'p2': 0.014115, 'p3': 0.045876, 'p1': 0.045209, 'r0': 0.244875, 'r1'
 {'p2': -0.16769, 'p3': -0.057616, 'p1': 0.110235, 'r0': 0.244108, 'r1': 0.2, 'r2': 0.294188, 'r3': 0.272386, 's3': -0.078033, 's2': -0.064043, 's1': -0.063286},
 {'p2': -0.183304, 'p3': -0.050531999999999994, 'p1': -0.14166099999999998, 'r0': 0.20001000000000002, 'r1': 0.260614, 'r2': 0.355705, 'r3': 0.20001000000000002, 's3': 0.08078099999999999, 's2': -0.09217800000000001, 's1': -0.13489299999999999}
 ]
-
 
 
 population = StochasticGradientDescentOptimizer.createPopulation(len(vectors), pcw)
@@ -98,8 +93,6 @@ for pc in population:
 optimizer = StochasticGradientDescentOptimizer(objFunc)
 
 results = optimizer.optimize(population, max_iterations, fault_tolerance)
-
-
 
 print "\nStochastic Gradient Descent solutions generated"
 

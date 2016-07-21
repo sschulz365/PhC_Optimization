@@ -19,7 +19,6 @@ class Optimizer(object):
     population is a set of PhCDesign
     returns a set of optimized PhCDesign
     """
-    #
 
     @classmethod
     def createPopulation(self, population_size, pcw_archetype):
