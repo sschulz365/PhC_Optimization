@@ -1,6 +1,5 @@
 # Sean Billings, 2015
 
-from mpbParser import parseObjFunctionParams, parseObjFunctionParams3D
 import math
 import os
 from abc import ABCMeta, abstractmethod
@@ -26,7 +25,6 @@ class ParetoFunction:
     @abstractmethod
     def dominates(self, solution_a, solution_b): pass
 
-# TODO: integrate parser abstraction
 class ParetoMaxFunction(ParetoFunction):
     __metaclass__ = ABCMeta
 
@@ -46,12 +44,13 @@ class ParetoMaxFunction(ParetoFunction):
         self.experiment.setParams(pcw.solution_vector)
         # currently using calc type 4 is required
         # experiment.setCalculationType(4)
-        self.experiment.perform()
 
         # parse the objParams from the experiment
         # see mpbParser.py for the definition of this set of values
         # (including parsing failure conditions)
-        results = parseObjFunctionParams(self.experiment)
+
+        results = self.experiment.extractFunctionParams()
+
 
 
         # in the case where bandwidth/bgp is undetermined/ too small to approximate

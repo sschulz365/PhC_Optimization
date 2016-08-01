@@ -6,7 +6,8 @@ import os
 # The following parser has been defined for the line defect waveguide
 # as specified in output format used for the W1_2D_v04.ctl mpb control file
 # this method parses, Loss, bandwidth, and Group Index and associated output values like loss at ng0 and BGP
-def parseObjFunctionParams(experiment): # input is an experiment
+# parseStrategy = MINDNG or MINLOSS (default is MAXGBP)
+def parseObjFunctionParams(experiment, parseStrategy="MAXGBP"): # input is an experiment
     outF = open(experiment.outputFile)
     groupIndex = 0
     loss = 0
@@ -120,14 +121,14 @@ def parseObjFunctionParams(experiment): # input is an experiment
 
     #end for (actual parsing)
 
-    return extractFOM(experiment,lossMap, lossContrastMap, groupIndexMap,bandwidths,"MAXGBP")
+    return extractFOM(experiment,lossMap, lossContrastMap, groupIndexMap,bandwidths,parseStrategy)
 
 
 
 # The following parser has been defined for the line defect waveguide
 # as specified in output format used for the W1_3D_v1.ctl mpb control file
 # this method parses, Loss, bandwidth, and Group Index and associated output values like loss at ng0 and BGP
-def parseObjFunctionParams3D(experiment): # input is an experiment
+def parseObjFunctionParams3D(experiment, parseStrategy="MaxGBP"): # input is an experiment
     outF = open(experiment.outputFile)
     groupIndex = 0
     loss = 0
@@ -213,17 +214,17 @@ def parseObjFunctionParams3D(experiment): # input is an experiment
         
     #end for (actual parsing)
 
-    print "Loss Map: " + str(lossMap)
-    print "Group Index Map: " + str(groupIndexMap)
+    #print "DEBUG: Loss Map: " + str(lossMap)
+    #print "DEBUG: Group Index Map: " + str(groupIndexMap)
 
-    return extractFOM(experiment,lossMap, lossContrastMap, groupIndexMap, bandwidths, "MAXGBP")
+    return extractFOM(experiment,lossMap, lossContrastMap, groupIndexMap, bandwidths, parseStrategy)
 
 
 # The following parser has been defined in order to abstract the FOM extraction
 # from the parsing of the values themselves
 # The way in which FOM are extracted can be specified with the 'mode' field
-# TODO: implement mode
-def extractFOM(experiment, lossMap, lossContrastMap, groupIndexMap, bandwidths, mode):
+# parseStrategy = MINDNG or MINLOSS (default is MAXGBP)
+def extractFOM(experiment, lossMap, lossContrastMap, groupIndexMap, bandwidths, parseStrategy):
      # The following section determines the group index
     maxBandwidthRatio = 0
     ng0_index = 0
@@ -381,39 +382,36 @@ def extractFOM(experiment, lossMap, lossContrastMap, groupIndexMap, bandwidths, 
         bandwidthMinIndex = min(potentialBandwidthIndexes)
         bandwidthMaxIndex = max(potentialBandwidthIndexes)
 
-        """
-        # select group index that minimizes change in ng
-        delta = math.fabs(ng0)
-        for i in range(bandwidthMinIndex, bandwidthMaxIndex):
-            delta_check = math.fabs(math.fabs(groupIndexMap[i + 1]) - math.fabs(groupIndexMap[i]))
-            if delta_check < delta:
-                delta = delta_check
-                ng0_index = i
+        # use the specified parseStrategy to determine ng_0
 
-        """
+        if parseStrategy == "MINDNG":
+            # select group index that minimizes change in ng
+            delta = math.fabs(ng0)
+            for i in range(bandwidthMinIndex, bandwidthMaxIndex):
+                delta_check = math.fabs(math.fabs(groupIndexMap[i + 1]) - math.fabs(groupIndexMap[i]))
+                if delta_check < delta:
+                    delta = delta_check
+                    ng0_index = i
+        elif parseStrategy == "MINLOSS":
+            # centralize group index in flat band then minimize group index based on loss
+            ng0_index = (bandwidthMaxIndex + bandwidthMinIndex)/2
+            extended_ng0_range = 0
+            if (bandwidthMaxIndex - bandwidthMinIndex) != 0:
+                extended_ng0_range = max(int(math.floor(math.log(bandwidthMaxIndex - bandwidthMinIndex))),0)
+            min_index_loss_ratio = lossMap[ng0_index]/math.pow(ng0, 2)
+            min_loss_index = ng0_index
 
-        """
+            for b in range(ng0_index -extended_ng0_range, ng0_index + extended_ng0_range + 1):
 
-        # centralize group index in flat band then minimize group index based on loss
-        ng0_index = (bandwidthMaxIndex + bandwidthMinIndex)/2
-        extended_ng0_range = 0
-        if (bandwidthMaxIndex - bandwidthMinIndex) != 0:
-            extended_ng0_range = max(int(math.floor(math.log(bandwidthMaxIndex - bandwidthMinIndex))),0)
-        min_index_loss_ratio = lossMap[ng0_index]/math.pow(ng0, 2)
-        min_loss_index = ng0_index
+                if b in potentialBandwidthIndexes:
+                    index_loss_ratio = math.fabs(lossMap[b])/math.pow(groupIndexMap[b], 2)
+                    if index_loss_ratio < min_index_loss_ratio:
+                        min_index_loss_ratio = index_loss_ratio
+                        min_loss_index = b
 
-        for b in range(ng0_index -extended_ng0_range, ng0_index + extended_ng0_range + 1):
-
-            if b in potentialBandwidthIndexes:
-                index_loss_ratio = math.fabs(lossMap[b])/math.pow(groupIndexMap[b], 2)
-                if index_loss_ratio < min_index_loss_ratio:
-                    min_index_loss_ratio = index_loss_ratio
-                    min_loss_index = b
-
-        ng0_index = min_loss_index
-        """
-
-        ng0 = groupIndexMap[ng0_index]
+            ng0_index = min_loss_index
+        else:
+            ng0 = groupIndexMap[ng0_index]
 
 
         potentialBandwidthIndexes = []

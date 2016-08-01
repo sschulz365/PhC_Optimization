@@ -20,12 +20,13 @@ experiment.setParams(solution)
 experiment.setCalculationType(4)
 experiment.setBand(23)
 experiment.kinterp = 19
+experiment.parseStrategy="MINLOSS"
 
 # output file checker
 #print experiment.extractFunctionParams()
 
 #the following can be used if the outputFile has already been generated
-print mpbParser.parseObjFunctionParams(experiment)
+print mpbParser.parseObjFunctionParams(experiment, "MINDNG")
 
 print "\n3D Loss\n"
 
@@ -45,5 +46,5 @@ experiment.dim3 = True
 #print experiment.extractFunctionParams()
 
 #the following can be used if the outputFile has already been generated
-print mpbParser.parseObjFunctionParams3D(experiment)
+print mpbParser.parseObjFunctionParams3D(experiment, "MINDNG")
 
