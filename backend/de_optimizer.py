@@ -52,15 +52,11 @@ class DeOptimizer(Optimizer):
             results = population[i].figures_of_merit
             solution_score = population[i].score
 
-            #DEBUG
-
             print "\nFigures of merit: " + str(results)
             print "\nScore: " + str(solution_score)
             # each step will require a simulatation in MPB
-            # print "Score: " + str(population_score[i])
 
             # supplement elites
-            # this is buggy
             if i < elite_set_size:
                 elites[population_score[i]] = population[i]
                 top_scores.append(population_score[i])
@@ -78,10 +74,7 @@ class DeOptimizer(Optimizer):
                 x1 = numpy.random.randint(0, elite_set_size)
                 x2 = numpy.random.randint(0, elite_set_size)
                 x3 = numpy.random.randint(0, elite_set_size)
-                # could base on scoring metric
 
-
-                # could clean this up to be more efficient
                 while x1 == x2 or x2 == x3 or x1 == x3 or j == x1 or j == x2 or j == x3:
                     x1 = numpy.random.randint(1, elite_set_size)
                     x2 = numpy.random.randint(1, elite_set_size)
@@ -116,8 +109,6 @@ class DeOptimizer(Optimizer):
             #end for j
 
             print "\nGenerating Elites..."
-            # There is a bug that involves not being able to fill the elites bag
-            # to maximum capacity in the elite update/generate code below
 
             # compute the worst current elite score (max_score)
             max_score = 0
@@ -140,7 +131,6 @@ class DeOptimizer(Optimizer):
 
             top_scores = unique_top_scores
 
-            #top_score_indexes = numpy.unique(top_scores)  #numpy.unique returns the sorted unique elements from top_scores
             print "\nTop Scores: " + str(top_scores)
 
 
@@ -164,11 +154,5 @@ class DeOptimizer(Optimizer):
                 print "\nElite: " + str(elite_vector)
                 print "\nResults: " + str(results)
                 print "\nScore: " + str(elite.score)
-
-                # end for  generation
-
-        #final_elites = []
-        #for i in range(0, elite_size):
-        #    final_elites.append(elites[top_scores[i]])
 
         return elites

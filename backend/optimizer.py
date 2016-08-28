@@ -19,7 +19,6 @@ class Optimizer(object):
     population is a set of PhCDesign
     returns a set of optimized PhCDesign
     """
-    #
 
     @classmethod
     def createPopulation(self, population_size, pcw_archetype):
@@ -31,7 +30,6 @@ class Optimizer(object):
         for i in range(0, population_size):
             assert isinstance(population[i], PhCWDesign)
             new_vector =  population[i].solution_vector.copy()
-            #boundary = 1
             for j in new_vector.keys():
                 if 'r' in j:
 

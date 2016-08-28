@@ -50,30 +50,13 @@ class SpeaOptimizer(Optimizer):
             # evaluates the objectives of each solution in population and stores evaluated solutions in the form [objective_function_map, solution]
             # because dominance works in terms of maximization, the inverted loss 1/a is used
             for pcw in population:
-                #objective_function_map = {}
-                #print "DEBUG: Solution: " + str(pcw.solution_vector)
+
                 self.pareto_function.evaluate(pcw)
-
-
-                objective_function_results = pcw.figures_of_merit
-
-                # objective_function_results is in the form
-                # [bandwidthNormalized, ng0, avgLoss, bandWidthRatio, loss_at_ng0]      (Aug 11, 2015)
-
-                #objective_function_map["bandwidth"] = objective_function_results[0]
-                #objective_function_map["group_index"] = objective_function_results[1]
-                #objective_function_map["average_loss*"] = 1/objective_function_results[2]
-                #objective_function_map["BGP"] = objective_function_results[3]
-                #objective_function_map["loss_at_group_index"] = 1/objective_function_results[4]
-                #objective_function_map["delay"] = objective_function_results[5]
-                #evaluated_population.append([objective_function_map, solution])
 
                 evaluated_population.append(pcw)
 
-
                 # display solution and results in the console
                 print "Solution: " + str(pcw.solution_vector) + "\n"
-
 
                 print "Objectives: "
                 for key in self.pareto_function.key_list.keys():
@@ -95,14 +78,11 @@ class SpeaOptimizer(Optimizer):
             if len(updated_pareto_set) > pareto_archive_size:
                 updated_pareto_set = self.cluster_reduce(updated_pareto_set, pareto_archive_size)
 
-
-
             pareto_set = updated_pareto_set[:] # reference safety precaution
 
             # print the results in the pareto_set
             j= 1
             for pcw in pareto_set:
-                #objective_function_map = solution[0]
                 print "\nPareto Solution " + str(j) + ": "+ str(pcw.solution_vector)+ "\n"
                 j += 1
                 print "Non-Dominated Objectives: "
@@ -123,7 +103,6 @@ class SpeaOptimizer(Optimizer):
                 scored_pareto_set, scored_population = self.evaluate_fitness(updated_pareto_set, evaluated_population)
 
                 population = self.evolve(tournament_selection_rate, scored_pareto_set, scored_population, len(evaluated_population))
-
 
         # executes after max_generation iterations of the SPEA routine, have executed
 
@@ -194,11 +173,10 @@ class SpeaOptimizer(Optimizer):
 
         # add all solutions to the indexed cluster_set
         cluster_set = {}
-        # print "\n" # + str(updated_pareto_set) + "\n" # sanity check
+
         for i in range (0, len(updated_pareto_set)):
             cluster_set[i] = [updated_pareto_set[i]]
-        #print cluster_set.keys() # sanity check
-        #print "\n" # sanity check
+
         cluster_size = len(cluster_set.keys())
 
         # reduce the number of clusters to pareto_archive_size
@@ -223,8 +201,6 @@ class SpeaOptimizer(Optimizer):
 
             cluster_set.pop(cluster_b_index) # potentially wrong
             cluster_set[cluster_a_index] = new_cluster
-            #print cluster_set.keys() # sanity check
-            #print len(cluster_set.keys()) # should be updated from above
             cluster_size = len(cluster_set.keys())
         # end of cluster generation
 
@@ -290,19 +266,13 @@ class SpeaOptimizer(Optimizer):
                         parent_b_score = parent_a_score
                         parent_a = solution
                         parent_a_score = solution[0]
-
                     elif solution[0] >= parent_b_score:
                         parent_b = solution
                         parent_b_score = solution[0]
-                # fix
-
-                # parent_a = mating_pool[random.randint(0,len(mating_pool))]
-                # parent_b = mating_pool[random.randint(0,len(mating_pool))]
                 updated_population.append(self.crossover(parent_a[1], parent_b[1]))
 
             else:
                 # mutate
-                # parent_a = mating_pool[random.randint(0,len(mating_pool))]
 
                 # find top scoring solution from selected_solutions
                 parent_a_score = 0
@@ -312,7 +282,6 @@ class SpeaOptimizer(Optimizer):
                     if solution[0] > parent_a_score:
                         parent_a = solution
                         parent_a_score = solution[0]
-                #
                 updated_population.append(self.mutate(parent_a[1]))
 
         return updated_population
@@ -324,7 +293,7 @@ class SpeaOptimizer(Optimizer):
     # both are dictionaries
     # this method simply evaluates whether a dominates b
     def dominates(self, a, b):
-        #print "\n" + str(a)
+
         for key in a.keys():
             if math.fabs(a[key]) < math.fabs(b[key]):
                 return False
@@ -338,7 +307,7 @@ class SpeaOptimizer(Optimizer):
     # both are dictionaries
     # this method simply evaluates whether a strongly dombinates b
     def strongly_dominates(self, a, b):
-        # print "\n" + str(a) + "dominates\n" + str(b) + "?\n"
+
         for key in a.keys():
             if math.fabs(a[key]) <= math.fabs(b[key]):
                 return False

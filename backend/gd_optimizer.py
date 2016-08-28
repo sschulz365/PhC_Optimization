@@ -41,18 +41,16 @@ class GradientDescentOptimizer(Optimizer):
             print "\nPerforming Gradient Descent on " + str(vector)
             print "\nVector " + str(j) + " of " + str(len(population))
             j += 1
-            # print vector
             self.objective_function.evaluate(pcw)
             original_fom = str(pcw.figures_of_merit)
             print "\nInitial score: " + str(pcw.score)
-            # could keep track of scores
+
             i = 1
             check_pcw = pcw.copy_phc
             prev_pcw = check_pcw.copy_phc
             while i <= max_iterations:
                 print "\n\nIteration: " + str(i)
                 # the Gradient Descent method recursively improves 'vector' until a stopping condition is met
-                # (see above for method specifications)
 
                 result = self.gradientDescent(check_pcw,
                                          descent_scaler,
@@ -97,7 +95,6 @@ class GradientDescentOptimizer(Optimizer):
     # This method is time consuming but the convergence is nice and it can approximate
     # local minima in the neighbourhood of the passed vector
 
-
     def gradientDescent(self, pcw, descent_scaler,
                         completion_scaler, alpha_scaler):
 
@@ -117,11 +114,11 @@ class GradientDescentOptimizer(Optimizer):
         gradientValues = {}
 
 
-        """
+
         # In the following we compute the partial derivatives
         # of the objective function, with respect to the parameters,
         # and store the terms as a representation of the gradient in gradientValues
-        """
+
         vector = next_pcw.solution_vector
         next_vector = vector.copy()
         print "\nEvaluating gradient..."
@@ -131,16 +128,7 @@ class GradientDescentOptimizer(Optimizer):
             # this value can be scaled
             delta = 0.00001
 
-            # The following code implements:
-            # -h finite difference for f(x - delta), where x is the current key
-            """
-            vectorMinusDeltaKey = vector.copy()
-            vectorMinusDeltaKey[key] = vectorMinusDeltaKey[key] - delta
-            constraints.fix(vectorMinusDeltaKey, constraintFunctions)
-            deltaMinusScore = (objectiveFunction(vectorMinusDeltaKey, experiment))
-            if deltaMinusScore > 10000:
-                     deltaMinusScore = (objectiveFunction(vectorPlusDeltaKey, experiment))
-            """
+
             # The following code implements:
             # +h finite difference for f(x + delta), where x is the current key
 
@@ -154,23 +142,14 @@ class GradientDescentOptimizer(Optimizer):
             # Below is the first order partial derivative in key
             # computed by forward finite difference
 
-            gradientValues[key] = float("{0:.6f}".format( (deltaPlusScore - initial_score)  * ( 0.00001/delta)))
+            gradientValues[key] = float("{0:.6f}".format( (deltaPlusScore - initial_score) ))
 
             # removing delta is incorrect, but it can help the scaling of score output
-            # multiplying by 0.00001 helps scale the gradient into the constrained bounds of [0,1]
             # this initial scaling is handled during the augmented backtracking approach below
-
-
-            # Below is the first order partial derivative in key
-            # computed by central finite difference
-            """
-            gradientValues[key] = ((deltaPlusScore - deltaMinusScore) / 2*delta) * 0.0001
-            """
-
 
             # update next_vector
             next_vector[key] = vector[key] - gradientValues[key]
-            #                                alpha_scaler*
+
 
             # update gradient_innerProduct_terms
             gradient_innerProduct_terms[key] = (-1)*(gradientValues[key]**2)
@@ -203,8 +182,6 @@ class GradientDescentOptimizer(Optimizer):
         gradient_factor = completion_scaler*alpha_scaler*gradient_innerProduct
         print "Gradient Factor: " + str(gradient_factor)
 
-        # THE FOLLOWING COULD BE IMPROVED WITH THE FORMALISM OF
-        # NONLINEAR CONDITIONAL OPTIMIZATION
         attempts = 0
         print "\nScaling Descent\n"
         print "Score: " + str(next_score)
@@ -220,7 +197,7 @@ class GradientDescentOptimizer(Optimizer):
                next_vector[key] = (vector[key] - alpha_scaler*gradientValues[key])
 
             next_pcw.solution_vector = next_vector
-            next_pcw.constrain() # may want to use lagrangian methods instead
+            next_pcw.constrain()
             self.objective_function.evaluate(next_pcw)
             next_score = next_pcw.score
 
@@ -241,7 +218,6 @@ class GradientDescentOptimizer(Optimizer):
         if next_score < (descent_score + gradient_factor):
             return next_pcw
 
-        #TODO: revisions to below
         # if a vectors score already satisfies the wolfe conditions,
         # then we scale up the value of the gradient descent
         if attempts == 0:
